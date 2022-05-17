@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/mihalichpalich/practicum_messager#readme",
   "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "^1.0.9",
     "parcel": "^2.5.0",
     "sass": "^1.51.0"
   }
