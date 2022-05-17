@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/mihalichpalich/practicum_messager#readme",
   "devDependencies": {
-    "parcel": "^2.5.0"
+    "parcel": "^2.5.0",
+    "sass": "^1.51.0"
   }
 }
