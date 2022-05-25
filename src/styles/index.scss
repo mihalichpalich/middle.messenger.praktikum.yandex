@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+@import 'reset';
+
+//pages
+@import '../pages/chat/chat';
+
+//modules
+@import '../partials/modules/form/form';
+@import '../partials/modules/chatList/chatList';
+@import '../partials/modules/chatMessages/chatMessages';
+
+//components
+@import '../partials/formHeader/formHeader';
+@import '../partials/formItem/formItem';
+@import '../partials/formButton/formButton';
+@import '../partials/formLink/formLink';
+@import '../partials/avatar/avatar';
+@import '../partials/chatListItem/chatListItem';
+
+body {
+  font-family: Roboto, sans-serif;
+  font-size: $fs-text;
+}

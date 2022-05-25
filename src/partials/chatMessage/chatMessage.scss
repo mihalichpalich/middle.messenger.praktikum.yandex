@@ -1,0 +1,27 @@
+@import '../../styles/variables';
+
+.chat-message {
+  display: flex;
+  align-self: flex-start;
+  padding: 1vh 2vw 0.5vh;
+  background-color: #F8FEF5;
+  border-radius: 5px;
+
+  &--my {
+    align-self: flex-end;
+    background-color: #EBF3E7;
+  }
+
+  &__text {
+    width: 19.2vw;
+    padding-bottom: 1vh;
+    margin-right: 1vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__date {
+
+  }
+}
