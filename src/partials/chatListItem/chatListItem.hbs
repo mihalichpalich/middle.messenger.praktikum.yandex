@@ -1,22 +1,22 @@
-<div class="chat-message">
-  {{> avatar/avatar src="../../../static/img/profile/avatar-default.png"}}
-  <div class="chat-message__data">
-    <div class="chat-message__data-part">
-      <span class="chat-message__data-name">{{name}}</span>
-      <div class="chat-message__date-and-checked">
+<div class="chat-list-item">
+  {{> avatar/avatar src=avatarSrc}}
+  <div class="chat-list-item__data">
+    <div class="chat-list-item__data-part">
+      <span class="chat-list-item__data-name">{{name}}</span>
+      <div class="chat-list-item__date-and-checked">
         {{#if check_sent}}
-          <img src="../../../static/icons/message/sent.svg" alt="Статус" class="chat-message__data-status">
+          <img src="../../static/icons/message/sent.svg" alt="Статус" class="chat-list-item__data-status">
         {{/if}}
         {{#if check_read}}
-          <img src="../../../static/icons/message/read.svg" alt="Статус" class="chat-message__data-status">
+          <img src="../../static/icons/message/read.svg" alt="Статус" class="chat-list-item__data-status">
         {{/if}}
         <span>{{messageDate}}</span>
       </div>
     </div>
-    <div class="chat-message__data-part">
-      <span class="chat-message__data-text">{{text}}</span>
+    <div class="chat-list-item__data-part">
+      <span class="chat-list-item__data-text">{{text}}</span>
       {{#if unread}}
-          <div class="chat-message__data-unread">
+          <div class="chat-list-item__data-unread">
             <span>{{unread}}</span>
           </div>
       {{/if}}

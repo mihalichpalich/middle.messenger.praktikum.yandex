@@ -1,7 +1,7 @@
 {
   "chats": [
     {
-      "avatar": "../../static/img/profile",
+      "avatarSrc": "../../static/img/profile/avatar-default.png",
       "name": "Наталья",
       "text": "отлично! в среду в 14:00 по мск. чуть позже скин ссылку",
       "messageDate": "10:19",
@@ -10,7 +10,7 @@
       "unread": null
     },
     {
-      "avatar": "../../static/img/profile",
+      "avatarSrc": "../../static/img/profile/avatar-default.png",
       "name": "Влад",
       "text": "ну удачи тогда)",
       "messageDate": "Вт",
@@ -19,7 +19,7 @@
       "unread": null
     },
     {
-      "avatar": "../../static/img/profile",
+      "avatarSrc": "../../static/img/profile/avatar-default.png",
       "name": "Лиза",
       "text": "Ок, обсудим этот вопрос после майских",
       "messageDate": "01.05.2022",
@@ -28,7 +28,7 @@
       "unread": null
     },
     {
-      "avatar": "../../static/img/profile",
+      "avatarSrc": "../../static/img/profile/avatar-default.png",
       "name": "Арина",
       "text": "Каеф",
       "messageDate": "22.04.2022",

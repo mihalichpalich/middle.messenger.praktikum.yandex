@@ -8,10 +8,10 @@ title: Мессенджер
   <div class="chat__list-block">
     <div class="chat__search">
       <a href="#" alt="Скрыть" class="chat__search-link">
-        <img class="chat__search-icon" src="../../../static/icons/chat_list_top/hide.svg">
+        <img class="chat__search-icon" src="../../static/icons/chat_list_top/hide.svg">
       </a>
       <a href="#" alt="Профиль"  class="chat__search-link">
-        <img class="chat__search-icon" src="../../../static/icons/chat_list_top/profile.svg">
+        <img class="chat__search-icon" src="../../static/icons/chat_list_top/profile.svg">
       </a>
       <input type="text" placeholder="Поиск" class="chat__search-input">
     </div>
@@ -21,9 +21,13 @@ title: Мессенджер
     <div class="chat__dialog-header">
       <span class="chat__dialog-header-name">Наталья</span>
       <a href="#">
-        <img src="../../../static/icons/chat/chat_menu.svg" alt="Меню">
+        <img src="../../static/icons/chat/chat_menu.svg" alt="Меню">
       </a>
     </div>
     {{> modules/chatMessages/chatMessages}}
+    <div class="chat__form">
+      <input type="text" class="chat__form-input" placeholder="Написать сообщение...">
+      <img src="../../static/icons/chat/send_massage-disabled.svg" alt="Отправить">
+    </div>
   </div>
 </div>

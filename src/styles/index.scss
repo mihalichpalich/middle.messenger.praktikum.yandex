@@ -3,7 +3,7 @@
 @import 'reset';
 
 //pages
-@import '../pages/chat/chat';
+@import '../pages/styles/chat';
 
 //modules
 @import '../partials/modules/form/form';
@@ -17,6 +17,7 @@
 @import '../partials/formLink/formLink';
 @import '../partials/avatar/avatar';
 @import '../partials/chatListItem/chatListItem';
+@import '../partials/chatMessage/chatMessage';
 
 body {
   font-family: Roboto, sans-serif;

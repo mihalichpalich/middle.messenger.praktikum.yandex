@@ -63,4 +63,25 @@
       }
     }
   }
+
+  &__form {
+    display: flex;
+    height: 7%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4vh 0.8vw;
+
+    &-input {
+      height: 100%;
+      padding-left: 1vw;
+      margin-right: 1vw;
+      flex-grow: 1;
+      border: 1px solid $color-grey;
+      border-radius: 10px;
+
+      &::placeholder {
+        color: $color-darkgrey;
+      }
+    }
+  }
 }

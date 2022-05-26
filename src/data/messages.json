@@ -3,21 +3,21 @@
     {
       "text": "Михаил, там же праздники)))",
       "messageDate": "29.04.2022 12:23",
-      "isIncoming": true,
+      "isOutgoing": false,
       "check_sent": false,
       "check_read": false
     },
     {
       "text": "так это только понедельник и вторник",
       "messageDate": "29.04.2022 12:25",
-      "isIncoming": false,
+      "isOutgoing": true,
       "check_sent": false,
       "check_read": true
     },
     {
       "text": "отлично! в среду в 14:00 по мск. чуть позже скину ссылку на зум)",
       "messageDate": "10:19",
-      "isIncoming": true,
+      "isOutgoing": false,
       "check_sent": false,
       "check_read": false
     }

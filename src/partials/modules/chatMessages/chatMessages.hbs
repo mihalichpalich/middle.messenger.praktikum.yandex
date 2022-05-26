@@ -1,3 +1,5 @@
 <div class="chat-messages">
-
+  {{#each messages.messages}}
+    {{> chatMessage/chatMessage this}}
+  {{/each}}
 </div>
