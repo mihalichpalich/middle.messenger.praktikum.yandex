@@ -3,13 +3,21 @@
 .form-button {
   width: 70%;
   height: 5vh;
-  margin-bottom: 3vh;
+  margin-bottom: 2vh;
   background-color: $color-blue;
   font-size: $fs-buttons;
   font-weight: bold;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
+
+  &--green {
+    background-color: $color-green;
+  }
+
+  &--red {
+    background-color: $color-red;
+  }
 
   &__link {
     color: $color-white;

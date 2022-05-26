@@ -5,12 +5,23 @@
   flex-direction: column;
   margin-bottom: 2vh;
 
+  &--row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    & .form-item__input {
+      width: 50%;
+    }
+  }
+
   &__label {
     margin-bottom: 0.7vh;
   }
 
   &__input {
     height: 3.6vh;
+    padding-left: 0.5vw;
     border: 1px solid $color-darkgrey;
   }
 }
