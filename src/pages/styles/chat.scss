@@ -1,0 +1,96 @@
+@import '../../styles/variables';
+
+.chat {
+  display: flex;
+  height: 100%;
+
+  &__list-block {
+    width: 33.3%;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid $color-darkgrey;
+  }
+
+  &__search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8%;
+    padding: 1.4vh 0.8vw;
+    border-bottom: 1px solid $color-darkgrey;
+
+    &-link {
+      width: 2vw;
+      height: 3.5vh;
+      background-color: transparent;
+    }
+
+    &-icon {
+      width: 100%;
+      height: 100%;
+    }
+
+    &-input {
+      width: 26vw;
+      height: 100%;
+      padding: 0 1vw;
+      background-color: $color-lightgrey;
+      border-radius: 3px;
+
+      &::placeholder {
+        color: $color-darkgrey;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__dialog {
+    width: 66.6%;
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 8%;
+      padding: 0 0.8vw;
+      border-bottom: 1px solid $color-darkgrey;
+
+      &-name {
+        font-weight: bold;
+      }
+
+      &-button {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &__form {
+    display: flex;
+    height: 7%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4vh 0.8vw;
+
+    &-input {
+      height: 100%;
+      padding-left: 1vw;
+      margin-right: 1vw;
+      flex-grow: 1;
+      border: 1px solid $color-grey;
+      border-radius: 10px;
+
+      &::placeholder {
+        color: $color-darkgrey;
+      }
+    }
+
+    &-button {
+      background-color: transparent;
+    }
+  }
+}

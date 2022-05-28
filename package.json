@@ -2,22 +2,30 @@
   "name": "practicum_messager",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "parcel src/pages/index.hbs --no-cache && parcel watch ./*",
+    "build": "parcel build src/pages/index.hbs --no-cache --public-url ./",
+    "start": "node ./server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mihalichpalich/practicum_messager.git"
+    "url": "git+https://github.com/mihalichpalich/middle.messenger.praktikum.yandex.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mihalichpalich/practicum_messager/issues"
+    "url": "https://github.com/mihalichpalich/middle.messenger.praktikum.yandex/issues"
   },
-  "homepage": "https://github.com/mihalichpalich/practicum_messager#readme",
+  "homepage": "https://github.com/mihalichpalich/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
-    "parcel": "^2.5.0",
-    "sass": "^1.51.0"
+    "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "@parcel/transformer-sass": "^2.3.2",
+    "parcel": "^2.3.2"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "engines": {
+    "node": ">=12.0.0"
   }
 }

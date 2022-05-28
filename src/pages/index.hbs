@@ -1,0 +1,21 @@
+---
+title: Вход
+header:
+  text: Авторизация
+inputs:
+  - inputName: login
+    labelName: Логин
+    type: text
+  - inputName: password
+    labelName: Пароль
+    type: password
+button:
+  ref: ./chat.hbs
+  text: Войти
+link:
+  ref: ./register.hbs
+  text: Регистрация
+---
+{{!< base}}
+
+{{> modules/form/form}}

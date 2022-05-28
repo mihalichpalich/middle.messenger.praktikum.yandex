@@ -1,0 +1,54 @@
+@import '../../styles/variables';
+
+.chat-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  padding: 1.4vh 0.8vw;
+  border-bottom: 1px solid $color-lightgrey;
+
+  &__data {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+
+    &-part {
+      display: flex;
+      justify-content: space-between;
+      color: $color-grey;
+    }
+
+    &-name {
+      font-weight: bold;
+      color: $color-black;
+    }
+
+    &-date-and-checked {
+      display: flex;
+    }
+
+    &-status {
+      height: 2.3vh;
+    }
+
+    &-text {
+      align-self: flex-end;
+      width: 85%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &-unread {
+      min-width: 1.2vw;
+      min-height: 2.8vh;
+      text-align: center;
+      background-color: $color-darkgrey;
+      color: white;
+      border-radius: 10px;
+    }
+  }
+}

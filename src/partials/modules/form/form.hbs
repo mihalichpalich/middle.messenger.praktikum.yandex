@@ -1,0 +1,14 @@
+<div class="form__wrapper">
+  {{> formHeader/formHeader header}}
+  <form action="#" class="form" method="post">
+    <div class="form__inputs-wrapper">
+      {{#each inputs}}
+        {{> formItem/formItem this}}
+      {{/each}}
+    </div>
+    <div class="form__buttons-wrapper">
+      {{> formButton/formButton button}}
+      {{> formLink/formLink link}}
+    </div>
+  </form>
+</div>
