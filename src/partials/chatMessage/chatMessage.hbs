@@ -1,4 +1,4 @@
-<div class="chat-message{{#if isOutgoing}} chat-message--my{{/if}}">
+<li class="chat-message{{#if isOutgoing}} chat-message--my{{/if}}">
   <p class="chat-message__text">{{text}}</p>
   <span class="chat-message__date">{{messageDate}}</span>
   {{#if check_sent}}
@@ -7,4 +7,4 @@
   {{#if check_read}}
     <img src="../../static/icons/message/read.svg" alt="Статус" class="chat-message__status">
   {{/if}}
-</div>
+</li>
