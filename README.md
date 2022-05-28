@@ -4,3 +4,7 @@
 
 Сборка ***parcel build src/pages/index.hbs --no-cache --public-url ./*** <br>
 Запуск ***parcel src/pages/index.hbs --no-cache && parcel watch ./****
+
+**Ссылка на макет**
+
+https://www.figma.com/file/Jly7jH1Ri2R99DbNYBI3LR/Practicum-Messager?node-id=41%3A75
