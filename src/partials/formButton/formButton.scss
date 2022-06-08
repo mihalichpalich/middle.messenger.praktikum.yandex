@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .form-button {
   width: 70%;
@@ -7,8 +7,6 @@
   background-color: $color-blue;
   font-size: $fs-buttons;
   font-weight: bold;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
   border-radius: 10px;
 
   &--green {

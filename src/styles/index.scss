@@ -1,25 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-@import 'reset';
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import "reset";
 
 //pages
-@import '../pages/styles/chat';
+@import "../pages/styles/chat";
 
 //modules
-@import '../partials/modules/form/form';
-@import '../partials/modules/chatList/chatList';
-@import '../partials/modules/chatMessages/chatMessages';
-@import '../partials/modules/profileForm/profileForm';
-@import '../partials/modules/error/error';
+@import "../partials/modules/form/form";
+@import "../partials/modules/chatList/chatList";
+@import "../partials/modules/chatMessages/chatMessages";
+@import "../partials/modules/profileForm/profileForm";
+@import "../partials/modules/error/error";
 
 //components
-@import '../partials/formHeader/formHeader';
-@import '../partials/formItem/formItem';
-@import '../partials/formButton/formButton';
-@import '../partials/formLink/formLink';
-@import '../partials/avatar/avatar';
-@import '../partials/chatListItem/chatListItem';
-@import '../partials/chatMessage/chatMessage';
+@import "../partials/formHeader/formHeader";
+@import "../partials/formItem/formItem";
+@import "../partials/formButton/formButton";
+@import "../partials/formLink/formLink";
+@import "../partials/avatar/avatar";
+@import "../partials/chatListItem/chatListItem";
+@import "../partials/chatMessage/chatMessage";
 
 body {
   font-family: Roboto, sans-serif;
