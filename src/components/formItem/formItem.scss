@@ -1,0 +1,28 @@
+@import "../../styles/variables";
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2vh;
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--row {
+    & .form-item__main {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      & .form-item__input {
+        width: 50%;
+      }
+    }
+  }
+
+  &__label {
+    margin-bottom: 0.7vh;
+  }
+}

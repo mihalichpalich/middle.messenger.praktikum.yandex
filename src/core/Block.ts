@@ -26,7 +26,7 @@ export default class Block<P = any> {
   eventBus: () => EventBus<Events>;
 
   protected state: any = {};
-  protected refs: {[key: string]: Block} = {};
+  public refs: {[key: string]: Block} = {};
 
   static componentName: string;
 
@@ -74,6 +74,7 @@ export default class Block<P = any> {
   }
 
   componentDidMount(props: P) {
+    return;
   }
 
   _componentDidUpdate(oldProps: P, newProps: P) {
@@ -122,7 +123,7 @@ export default class Block<P = any> {
 
   protected render(): string {
     return '';
-  };
+  }
 
   getContent(): HTMLElement {
     // Хак, чтобы вызвать CDM только после добавления в DOM
