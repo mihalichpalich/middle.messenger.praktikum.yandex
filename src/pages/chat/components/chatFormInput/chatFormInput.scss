@@ -1,0 +1,13 @@
+@import "../../../../styles/variables";
+
+.chat-form-input {
+  height: 70%;
+  padding-left: 1vw;
+  margin-bottom: 1vh;
+  border: 1px solid $color-grey;
+  border-radius: 10px;
+
+  &::placeholder {
+    color: $color-darkgrey;
+  }
+}

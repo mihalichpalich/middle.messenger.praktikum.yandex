@@ -1,0 +1,1 @@
+export {ChatFormButton as default} from './chatFormButton';
