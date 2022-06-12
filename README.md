@@ -13,4 +13,6 @@ https://www.figma.com/file/Jly7jH1Ri2R99DbNYBI3LR/Practicum-Messager?node-id=41%
 
 https://charming-kataifi-4d1201.netlify.app/
 
+**Ссылка на открытый pull request из ветки sprint_2 в ветку main**
 
+https://github.com/mihalichpalich/middle.messenger.praktikum.yandex/pull/4
