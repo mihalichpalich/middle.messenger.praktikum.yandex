@@ -1,0 +1,49 @@
+@import "../../../../styles/variables";
+
+.chat-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  padding: 1.4vh 0.8vw;
+  border-bottom: 1px solid $color-lightgrey;
+
+  &__data {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-grow: 1;
+
+    &-part {
+      display: flex;
+      justify-content: space-between;
+      color: $color-grey;
+    }
+
+    &-name {
+      font-weight: bold;
+      color: $color-black;
+    }
+
+    &-status {
+      height: 2.3vh;
+    }
+
+    &-text {
+      align-self: flex-end;
+      width: 85%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &-unread {
+      padding: 0.35vh 0.4vw;
+      text-align: center;
+      background-color: $color-darkgrey;
+      color: white;
+      border-radius: 10px;
+    }
+  }
+}

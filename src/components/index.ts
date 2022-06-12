@@ -5,3 +5,4 @@ export {FormInput} from './formInput/formInput';
 export {FormItem} from './formItem/formItem';
 export {FormError} from './formError/formError';
 export {Avatar} from './avatar/avatar';
+export {ErrorPage} from './errorPage/errorPage';

@@ -1,0 +1,41 @@
+@import "../../../../styles/variables";
+
+.chat-message {
+  display: flex;
+  align-self: flex-start;
+  align-items: flex-end;
+  padding: 1vh 1vw 0.5vh;
+  background-color: #f8fef5;
+  border-radius: 5px;
+
+  &--my {
+    align-self: flex-end;
+    background-color: #ebf3e7;
+  }
+
+  &__text {
+    max-width: 19.2vw;
+    margin-bottom: 1vh;
+    margin-right: 1vw;
+  }
+
+  &__date {
+    color: $color-darkgrey;
+    font-size: $fs-subtext;
+  }
+
+  &__status {
+    height: 2.5vh;
+    width: 2.5vh;
+    margin-left: 0.5vw;
+    background-size: cover;
+
+    &--sent {
+      background-image: url("../../../static/icons/message/sent.svg");
+    }
+
+    &--read {
+      background-image: url("../../../static/icons/message/read.svg");
+    }
+  }
+}

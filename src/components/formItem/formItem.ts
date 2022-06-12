@@ -17,22 +17,19 @@ export class FormItem extends Block {
       inputName,
       labelName,
       className,
-      onBlur: (e: FocusEvent) => {
-        const input = e.target as HTMLInputElement;
-        const value = input.value;
-        const errorText = validator(inputName, value);
-        this.refs.error.setProps({text: errorText});
-      },
-      onFocus: (e: FocusEvent) => {
-        const input = e.target as HTMLInputElement;
-        const value = input.value;
-        const errorText = validator(inputName, value);
-        this.refs.error.setProps({text: errorText});
-      },
+      onBlur: (e: FocusEvent) => this.handleEvent(e),
+      onFocus: (e: FocusEvent) => this.handleEvent(e),
       onInput: () => {
         this.refs.error.setProps({text: ''});
       }
     });
+  }
+
+  handleEvent(e: FocusEvent) {
+    const input = e.target as HTMLInputElement;
+    const value = input.value;
+    const errorText = validator(this.props.inputName, value);
+    this.refs.error.setProps({text: errorText});
   }
 
   render() {

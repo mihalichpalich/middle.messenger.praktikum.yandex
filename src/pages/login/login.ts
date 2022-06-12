@@ -8,7 +8,7 @@ export class LoginPage extends Block {
     super({
       onClickButton: (e: MouseEvent) => {
         e.preventDefault();
-        getFormData('#auth-form', '/');
+        getFormData('#auth-form', '/chat.html');
       }
     });
   }

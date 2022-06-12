@@ -1,18 +1,18 @@
 import {Block} from "../../core";
 
 interface AvatarProps {
-  src: string;
+  avatarSrc: string;
 }
 
 export class Avatar extends Block {
   static componentName = 'Avatar';
 
-  constructor({src}: AvatarProps) {
-    super({src});
+  constructor({avatarSrc}: AvatarProps) {
+    super({avatarSrc});
   }
 
   render() {
     // language=hbs
-    return `<img src="http://www.cherkasyoblenergo.com/uploads/posts/2018-02/1519657152_img_508630.png" alt="Аватар" class="avatar">`;
+    return `<img src="{{avatarSrc}}" alt="Аватар" class="avatar">`;
   }
 }

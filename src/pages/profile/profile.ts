@@ -27,7 +27,7 @@ export class ProfilePage extends Block {
             <div class="avatar-form__input-block">
               <input type="file" name="avatar" multiple accept="image/*,image/jpeg" class="avatar-form__file-input">
               <div class="avatar-form__image-wrapper">
-                {{{Avatar}}}
+                {{{Avatar avatarSrc="http://www.cherkasyoblenergo.com/uploads/posts/2018-02/1519657152_img_508630.png"}}}
               </div>
               <input type="submit" value="Добавить аватар" class="avatar-form__button">
             </div>
@@ -47,7 +47,7 @@ export class ProfilePage extends Block {
             </div>
             <div class="profile-form__buttons-wrapper">
               {{{FormButton text="Сохранить" onClick=onSave className="form-button--green"}}}
-              {{{FormButton text="Выход из приложения" onClick=onExit className="form-button--red"}}}
+              {{{FormButton text="Выход из приложения" onClick=onExit className="form-button--red" noSubmit=true}}}
             </div>
           </form>
       </main>

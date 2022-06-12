@@ -15,7 +15,7 @@ export default class HTTPTransport {
   queryStringify = (data: OptionType["data"]) => {
     return Object.entries(data).reduce((res, item, index) => {
       const [key, value] = item;
-      let str = index === 0 ? '?' : '&';
+      const str = index === 0 ? '?' : '&';
 
       return res.concat(`${str}${key}=${value.toString()}`);
     }, '');
