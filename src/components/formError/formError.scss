@@ -1,0 +1,7 @@
+@import "../../styles/variables";
+
+.form-error {
+  color: $color-red;
+  font-size: $fs-subtext;
+  min-height: 2vh;
+}
