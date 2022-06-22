@@ -8,7 +8,7 @@ interface ChatMessageProps {
   check_read: boolean;
 }
 
-export class ChatMessage extends Block {
+export class ChatMessage extends Block<ChatMessageProps> {
   static componentName = 'ChatMessage';
 
   constructor({

@@ -3,11 +3,14 @@ import {Block} from "../../core";
 interface FormButtonProps {
   text: string;
   className?: string;
-  onClick: () => void;
+  onClick?: () => void;
+  events?: {
+    click?: () => void;
+  }
   noSubmit?: boolean;
 }
 
-export class FormButton extends Block {
+export class FormButton extends Block<FormButtonProps> {
   static componentName = 'FormButton';
 
   constructor({text, className, onClick, noSubmit}: FormButtonProps) {

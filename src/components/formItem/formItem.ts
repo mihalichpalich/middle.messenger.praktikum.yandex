@@ -6,9 +6,12 @@ interface FormItemProps {
   labelName: string;
   type: string;
   className?: string;
+  onBlur?: (e: FocusEvent) => void;
+  onFocus?: (e: FocusEvent) => void;
+  onInput?: () => void;
 }
 
-export class FormItem extends Block {
+export class FormItem extends Block<FormItemProps> {
   static componentName = 'FormItem';
 
   constructor({type, inputName, labelName, className}: FormItemProps) {
@@ -17,8 +20,8 @@ export class FormItem extends Block {
       inputName,
       labelName,
       className,
-      onBlur: (e: FocusEvent) => this.handleEvent(e),
-      onFocus: (e: FocusEvent) => this.handleEvent(e),
+      onBlur: (e) => this.handleEvent(e),
+      onFocus: (e) => this.handleEvent(e),
       onInput: () => {
         this.refs.error.setProps({text: ''});
       }

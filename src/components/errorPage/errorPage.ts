@@ -1,14 +1,14 @@
 import {Block} from "../../core";
 
-interface FormLinkProps {
+interface ErrorPageProps {
   number: number;
   descr: string;
 }
 
-export class ErrorPage extends Block {
+export class ErrorPage extends Block<ErrorPageProps> {
   static componentName = 'ErrorPage';
 
-  constructor({number, descr}: FormLinkProps) {
+  constructor({number, descr}: ErrorPageProps) {
     super({number, descr});
   }
 

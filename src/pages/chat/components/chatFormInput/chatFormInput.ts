@@ -1,10 +1,13 @@
 import {Block} from "../../../../core";
 
 interface ChatFormInputProps {
-  onInput: () => void;
+  onInput?: () => void;
+  events?: {
+    input?: () => void;
+  }
 }
 
-export class ChatFormInput extends Block {
+export class ChatFormInput extends Block<ChatFormInputProps> {
   static componentName = 'ChatFormInput';
 
   constructor({onInput}: ChatFormInputProps) {

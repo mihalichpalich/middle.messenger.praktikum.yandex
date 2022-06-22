@@ -1,14 +1,19 @@
 import {Block} from "../../core";
 
-interface FormButtonProps {
+interface FormInputProps {
   type: string;
   name: string;
-  onBlur: (e: FocusEvent) => void;
-  onFocus: (e: FocusEvent) => void;
-  onInput: () => void;
+  onBlur?: (e: FocusEvent) => void;
+  onFocus?: (e: FocusEvent) => void;
+  onInput?: () => void;
+  events?: {
+    blur?: (e: FocusEvent) => void;
+    focus?: (e: FocusEvent) => void;
+    input?: () => void;
+  }
 }
 
-export class FormInput extends Block {
+export class FormInput extends Block<FormInputProps> {
   static componentName = 'FormInput';
 
   constructor({
@@ -16,7 +21,7 @@ export class FormInput extends Block {
     onFocus,
     onInput,
     ...props
-  }: FormButtonProps) {
+  }: FormInputProps) {
     super({...props, events: {blur: onBlur, focus: onFocus, input: onInput}});
   }
 

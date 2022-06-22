@@ -8,7 +8,7 @@ interface ChatListItemProps {
   unread: number | null;
 }
 
-export class ChatListItem extends Block {
+export class ChatListItem extends Block<ChatListItemProps> {
   static componentName = 'ChatListItem';
 
   constructor({avatarSrc, name, messageDate, text, unread}: ChatListItemProps) {
