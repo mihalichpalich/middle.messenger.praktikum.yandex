@@ -26,7 +26,7 @@ export class ChatMessage extends Block<ChatMessageProps> {
     return `
       <li class="chat-message{{#if isOutgoing}} chat-message--my{{/if}}">
         <p class="chat-message__text">{{text}}</p>
-        <span class="chat-message__date">{{messageDate}}</span>
+        <time class="chat-message__date">{{messageDate}}</time>
         {{#if check_sent}}
           <span class="chat-message__status chat-message__status--sent"></span>
         {{/if}}

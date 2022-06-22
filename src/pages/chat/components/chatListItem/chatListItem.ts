@@ -23,7 +23,7 @@ export class ChatListItem extends Block<ChatListItemProps> {
         <div class="chat-list-item__data">
           <div class="chat-list-item__data-part">
             <span class="chat-list-item__data-name">{{name}}</span>
-            <span>{{messageDate}}</span>
+            <time>{{messageDate}}</time>
           </div>
           <div class="chat-list-item__data-part">
             <span class="chat-list-item__data-text">{{text}}</span>
