@@ -10,7 +10,7 @@ export enum ValidationRule {
   Message = 'message'
 }
 
-const regExps = {
+const REGEXPS = {
   login: /^(?=.*[a-zA-Z])([a-zA-Z\d_-]+){3,20}$/,
   name: /^[A-ZА-Я][A-ZА-яa-zа-я-]+$/,
   email: /^[a-zA-Z\d!@#\$%\^\&*\)\(+=._-]+[@][a-zA-Z\d!@#\$%\^\&*\)\(+=._-]+[.][a-zA-Z\d!@#\$%\^\&*\)\(+=._-]+/,
@@ -19,18 +19,18 @@ const regExps = {
 };
 
 export function validator(rule: string, value: string) {
-  if (rule === ValidationRule.Login && !regExps.login.test(value)) {
+  if (rule === ValidationRule.Login && !REGEXPS.login.test(value)) {
     return 'Должен быть длиной 3-20 символов и может содержать латиницу, цифры (но не состоять из них), а также символы - и _';
-  } else if ((rule === ValidationRule.FirstName || rule === ValidationRule.SecondName) && !regExps.name.test(value)) {
+  } else if ((rule === ValidationRule.FirstName || rule === ValidationRule.SecondName) && !REGEXPS.name.test(value)) {
     return 'Латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов (допустим только -)';
-  } else if (rule === ValidationRule.Email && !regExps.email.test(value)) {
+  } else if (rule === ValidationRule.Email && !REGEXPS.email.test(value)) {
     return 'Только латиница, обязательно @ и символы между @ и . и после ., допускаются цифры и символы !@#$%^&*)(+=._- ';
   } else if (
       (rule === ValidationRule.Password || rule === ValidationRule.OldPassword || rule === ValidationRule.NewPassword)
-        && !regExps.password.test(value)
+        && !REGEXPS.password.test(value)
     ) {
     return 'От 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра';
-  } else if (rule === ValidationRule.Phone && !regExps.phone.test(value)) {
+  } else if (rule === ValidationRule.Phone && !REGEXPS.phone.test(value)) {
     return 'От 10 до 15 символов, состоит из цифр, может начинается с +';
   } else if (rule === ValidationRule.Message && !value) {
     return 'Сообщение не должно быть пустым';
