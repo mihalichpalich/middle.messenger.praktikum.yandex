@@ -11,7 +11,7 @@ export class ChatPage extends Block {
           <div class="chat__list-block">
             <nav class="chat__search">
               <button class="chat__search-button chat__search-button--hide"></button>              
-              <a href="./profile.html" alt="Профиль"  class="chat__search-link">
+              <a href="/settings" alt="Профиль"  class="chat__search-link">
                 <button class="chat__search-button chat__search-button--profile"></button>
               </a>
               <input type="text" placeholder="Поиск" class="chat__search-input">

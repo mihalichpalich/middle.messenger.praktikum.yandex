@@ -8,7 +8,7 @@ export class LoginPage extends Block {
     super({
       onClickButton: (e: MouseEvent) => {
         e.preventDefault();
-        getFormData('#auth-form', '/chat.html');
+        getFormData('#auth-form', '/messenger');
       }
     });
   }
@@ -26,7 +26,7 @@ export class LoginPage extends Block {
             </div>
             <div class="form__buttons-wrapper">
               {{{FormButton text="Войти" onClick=onClickButton}}}
-              {{{FormLink path="./register.html" text="Регистрация"}}}
+              {{{FormLink path="/sign-up" text="Регистрация"}}}
             </div>
           </form>
         </div> 

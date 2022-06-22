@@ -1,4 +1,3 @@
-@import "../../styles/index";
 @import "./components/chatListItem/chatListItem";
 @import "./components/chatMessage/chatMessage";
 @import "../../components/avatar/avatar";
@@ -33,11 +32,11 @@
       background-color: $color-white;
 
       &--hide {
-        background-image: url("../../../static/icons/chat_list_top/hide.svg");
+        background-image: url("../../static/icons/chat_list_top/hide.svg");
       }
 
       &--profile {
-        background-image: url("../../../static/icons/chat_list_top/profile.svg");
+        background-image: url("../../static/icons/chat_list_top/profile.svg");
       }
     }
 
@@ -82,7 +81,7 @@
       &-button {
         width: 2vw;
         height: 5vh;
-        background-image: url("../../../static/icons/chat/chat_menu.svg");
+        background-image: url("../../static/icons/chat/chat_menu.svg");
         background-size: cover;
         background-position-x: center;
         background-color: transparent;
@@ -101,7 +100,7 @@
   flex-direction: column;
   height: 82%;
   padding: 1.4vh 0.8vw;
-  background-image: url("../../../static/img/chat/chat-cover.jpg");
+  background-image: url("../../static/img/chat/chat-cover.jpg");
   background-size: cover;
   background-color: aquamarine;
 }

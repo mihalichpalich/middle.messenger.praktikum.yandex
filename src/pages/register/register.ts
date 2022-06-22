@@ -8,7 +8,7 @@ export class RegisterPage extends Block {
     super({
       onClickButton: (e: MouseEvent) => {
         e.preventDefault();
-        getFormData('#register-form', './index.html');
+        getFormData('#register-form', '/');
       }
     });
   }
@@ -30,7 +30,7 @@ export class RegisterPage extends Block {
             </div>
             <div class="form__buttons-wrapper">
               {{{FormButton text="Регистрация" onClick=onClickButton}}}
-              {{{FormLink path="./index.html" text="Вход"}}}
+              {{{FormLink path="/" text="Вход"}}}
             </div>
           </form>
         </div>

@@ -31,11 +31,11 @@
     background-size: cover;
 
     &--sent {
-      background-image: url("../../../static/icons/message/sent.svg");
+      background-image: url("../../static/icons/message/sent.svg");
     }
 
     &--read {
-      background-image: url("../../../static/icons/message/read.svg");
+      background-image: url("../../static/icons/message/read.svg");
     }
   }
 }

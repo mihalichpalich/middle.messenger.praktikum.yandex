@@ -8,7 +8,7 @@ export class ProfilePage extends Block {
     super({
       onSave: (e: MouseEvent) => {
         e.preventDefault();
-        getFormData('#profile-form', '/');
+        getFormData('#profile-form', '/messenger');
       },
       onExit: () => {
         location.href = '/';
