@@ -3,6 +3,18 @@ declare global {
 
   export type Keys<T extends Record<string, unknown>> = keyof T;
   export type Values<T extends Record<string, unknown>> = T[Keys<T>];
+
+  export type Indexed = { [key: string]: any };
+
+  export type APIError = {
+    reason: string;
+  };
+
+  export type AppState = {
+    isAuthLoading: boolean;
+    userId: null | number;
+    loginFormError: string | null;
+  };
 }
 
-export {}
+export {};

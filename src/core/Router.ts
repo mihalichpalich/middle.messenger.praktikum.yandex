@@ -1,12 +1,13 @@
 import Block from './Block';
 import renderDOM from "./renderDOM";
+import {BlockClass} from "./Block";
 
 class Route {
   private _pathname: string;
-  private readonly _blockClass: typeof Block;
+  private readonly _blockClass: BlockClass<any>;
   private _block: Block | null;
 
-  constructor(pathname: string, view: typeof Block) {
+  constructor(pathname: string, view: BlockClass<any>) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
@@ -41,23 +42,20 @@ class Route {
 }
 
 export default class Router {
-  public routes: Route[];
-  public history: History;
-  private _currentRoute: Route | null;
+  static __instance: Router;
+  public routes: Route[] = [];
+  public history: History = window.history;
+  private _currentRoute: Route | null = null;
 
   constructor() {
     if (Router.__instance) {
       return Router.__instance;
     }
 
-    this.routes = [];
-    this.history = window.history;
-    this._currentRoute = null;
-
     Router.__instance = this;
   }
 
-  use(pathname: string, block: typeof Block) {
+  use(pathname: string, block: BlockClass<any>) {
     const route = new Route(pathname, block);
     this.routes.push(route);
     return this;
@@ -78,7 +76,7 @@ export default class Router {
       return;
     }
 
-    if (this._currentRoute) {
+    if (this._currentRoute && this._currentRoute !== route) {
       this._currentRoute.leave();
     }
 
@@ -100,6 +98,8 @@ export default class Router {
   }
 
   getRoute(pathname: string) {
-    return this.routes.find(route => route.match(pathname));
+    const router = this.routes.find(route => route.match(pathname));
+    const pageNotFound = this.routes.find(route => route.match('*'))
+    return router || pageNotFound;
   }
 }

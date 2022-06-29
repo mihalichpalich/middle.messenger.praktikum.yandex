@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "npm run stylelint && npm run eslint && parcel src/index.html --no-cache",
-    "build": "parcel build src/index.html --no-cache --public-url ./",
+    "build": "NODE_ENV=production parcel build src/index.html --no-cache --public-url ./",
     "start": "node ./server.js",
     "stylelint": "stylelint \"**/*.scss\" --fix",
     "eslint": "eslint . --fix"

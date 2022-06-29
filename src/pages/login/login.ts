@@ -1,16 +1,33 @@
-import {Block} from "../../core";
+import {Block, Router, Store} from "../../core";
 import {getFormData} from "../../utils";
+import {withRouter} from "../../utils/withRouter";
+import {withStore} from "../../utils/withStore";
+import {initApp} from "../../services";
 
-export class LoginPage extends Block {
+interface LoginPageProps {
+  router: Router;
+  store: Store<AppState>;
+  formError?: () => string | null;
+}
+
+class LoginPage extends Block<LoginPageProps> {
   static componentName = 'LoginPage';
 
-  constructor() {
-    super({
+  constructor(props: LoginPageProps) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.store.dispatch(initApp);
+  }
+
+  protected getStateFromProps() {
+    this.state = {
       onClickButton: (e: MouseEvent) => {
         e.preventDefault();
         getFormData('#auth-form', '/messenger');
       }
-    });
+    }
   }
 
   render() {
@@ -34,3 +51,5 @@ export class LoginPage extends Block {
     `;
   }
 }
+
+export default withRouter(withStore(LoginPage));
