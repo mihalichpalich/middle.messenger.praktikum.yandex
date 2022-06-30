@@ -17,6 +17,10 @@
     background-color: $color-red;
   }
 
+  &--disabled {
+    background-color: $color-grey;
+  }
+
   &__link {
     color: $color-white;
     text-decoration: none;

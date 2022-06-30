@@ -12,8 +12,10 @@ declare global {
 
   export type AppState = {
     isAuthLoading: boolean;
+    isSignUpLoading: boolean;
     userId: null | number;
     loginFormError: string | null;
+    signUpFormError: string | null;
   };
 }
 

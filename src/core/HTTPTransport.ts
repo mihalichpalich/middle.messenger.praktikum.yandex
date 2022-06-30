@@ -19,21 +19,15 @@ export default class HTTPTransport {
 
       xhr.open(method, url);
       xhr.onload = function() {
-        if (this.status === 200) {
-          resolve(this.response);
-        } else {
-          const error: Error & {code?: number} = new Error(this.statusText);
-          error.code = this.status;
-          reject(error);
-        }
+        resolve(this.response);
       };
 
       xhr.setRequestHeader("Content-type", type);
 
       xhr.timeout = 15000;
-      xhr.onabort = () => reject({ reason: "abort" });
-      xhr.onerror = () => reject({ reason: "network error" });
-      xhr.ontimeout = () => reject({ reason: "timeout" });
+      xhr.onabort = () => reject({ resolve: "abort" });
+      xhr.onerror = () => reject({ resolve: "network error" });
+      xhr.ontimeout = () => reject({ resolve: "timeout" });
       xhr.withCredentials = true;
       xhr.responseType = "json";
 

@@ -1,6 +1,6 @@
 import {Block} from "../../core";
 
-export class ChatPage extends Block {
+export default class ChatPage extends Block {
   static componentName = 'ChatPage';
 
   render() {

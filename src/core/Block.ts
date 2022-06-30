@@ -94,7 +94,7 @@ export default class Block<P = any> {
     return true;
   }
 
-  setProps = (nextProps: P) => {
+  setProps = (nextProps: Partial<P>) => {
     if (!nextProps) {
       return;
     }

@@ -1,19 +1,34 @@
-import {Block} from "../../core";
+import {Block, Router, Store} from "../../core";
 import {getFormData} from "../../utils";
+import {withRouter} from "../../utils/withRouter";
+import {withStore} from "../../utils/withStore";
+import {initApp, logout} from "../../services";
 
-export class ProfilePage extends Block {
+interface ProfilePageProps {
+  router: Router;
+  store: Store<AppState>;
+  onLogout?: () => void;
+}
+
+class ProfilePage extends Block<ProfilePageProps> {
   static componentName = 'ProfilePage';
 
-  constructor() {
-    super({
+  constructor(props: ProfilePageProps) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.store.dispatch(initApp);
+  }
+
+  protected getStateFromProps() {
+    this.state = {
       onSave: (e: MouseEvent) => {
         e.preventDefault();
-        getFormData('#profile-form', '/messenger');
+        getFormData('#profile-form');
       },
-      onExit: () => {
-        location.href = '/';
-      }
-    });
+      onLogout: () => this.props.store.dispatch(logout)
+    };
   }
 
   render() {
@@ -47,10 +62,12 @@ export class ProfilePage extends Block {
             </div>
             <div class="profile-form__buttons-wrapper">
               {{{FormButton text="Сохранить" onClick=onSave className="form-button--green"}}}
-              {{{FormButton text="Выход из приложения" onClick=onExit className="form-button--red" noSubmit=true}}}
+              {{{FormButton text="Выход из приложения" onClick=onLogout className="form-button--red" noSubmit=true}}}
             </div>
           </form>
       </main>
     `;
   }
 }
+
+export default withRouter(withStore(ProfilePage));

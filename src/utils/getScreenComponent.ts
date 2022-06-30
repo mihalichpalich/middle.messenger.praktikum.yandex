@@ -1,11 +1,6 @@
 import {BlockClass} from "../core/Block";
 
-import LoginPage from '../pages/login';
-import RegisterPage from '../pages/register';
-import ProfilePage from '../pages/profile';
-import ChatPage from '../pages/chat';
-import Error404 from '../pages/error404';
-import Error500 from '../pages/error500';
+import {LoginPage, RegisterPage, ChatPage, ProfilePage, Error404, Error500} from '../pages';
 
 export enum Screens {
   Login = 'login',

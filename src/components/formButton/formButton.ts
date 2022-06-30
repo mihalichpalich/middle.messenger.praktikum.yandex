@@ -8,19 +8,24 @@ interface FormButtonProps {
     click?: () => void;
   }
   noSubmit?: boolean;
+  isLoading?: boolean;
 }
 
 export class FormButton extends Block<FormButtonProps> {
   static componentName = 'FormButton';
 
-  constructor({text, className, onClick, noSubmit}: FormButtonProps) {
-    super({text, className, noSubmit, events: {click: onClick}});
+  constructor({onClick, ...props}: FormButtonProps) {
+    super({events: {click: onClick}, ...props});
   }
 
   render() {
     // language=hbs
     return `
-      <button class="form-button {{className}}" {{#if noSubmit}}type="button"{{else}}type="submit"{{/if}}>
+      <button 
+        {{#if isLoading}}disabled{{/if}} 
+        class="form-button {{className}} {{#if isLoading}}form-button--disabled{{/if}}" 
+        {{#if noSubmit}}type="button"{{else}}type="submit"{{/if}}
+      >
         <span class="form-button__link">{{text}}</span>
       </button>
     `;

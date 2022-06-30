@@ -1,1 +1,0 @@
-export {authAPI as default} from './auth';
