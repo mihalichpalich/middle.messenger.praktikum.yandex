@@ -15,6 +15,5 @@ export async function signUp(dispatch: Dispatch<AppState>, _: AppState, action: 
 
   dispatch({isSignUpLoading: false, signUpFormError: null});
 
-  dispatch({userId: response.id});
   window.router.go('/settings');
 }

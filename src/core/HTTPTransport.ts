@@ -22,7 +22,11 @@ export default class HTTPTransport {
         resolve(this.response);
       };
 
-      xhr.setRequestHeader("Content-type", type);
+      if (type === "application/json") {
+        xhr.setRequestHeader("Content-type", type);
+      } else {
+        xhr.setRequestHeader('accept', 'application/json');
+      }
 
       xhr.timeout = 15000;
       xhr.onabort = () => reject({ resolve: "abort" });

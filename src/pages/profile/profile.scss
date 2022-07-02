@@ -4,23 +4,24 @@
 @import "../../components/formHeader/formHeader";
 @import "../../components/formInput/formInput";
 @import "../../components/formItem/formItem";
+@import "./components/avatarFormButton/avatarFormButton";
 
 .profile-form {
   width: 30%;
 
   &__wrapper {
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 1vh;
   }
 
   &__inputs-wrapper {
     display: flex;
     flex-direction: column;
-    margin-bottom: 4vh;
+    margin-bottom: 2vh;
   }
 
   &__buttons-wrapper {
@@ -53,12 +54,5 @@
   &__image-wrapper {
     position: relative;
     left: -4vw;
-  }
-
-  &__button {
-    height: 3.5vh;
-    padding: 0.5vh 1vw;
-    border-radius: 5px;
-    background-color: $color-grey;
   }
 }

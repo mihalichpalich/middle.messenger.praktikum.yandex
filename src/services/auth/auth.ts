@@ -22,11 +22,11 @@ export async function login(dispatch: Dispatch<AppState>, _: AppState, action: L
     return;
   }
 
-  dispatch({userId: responseUser.id});
+  dispatch({user: responseUser});
   window.router.go('/messenger');
 }
 
-export const logout = async () => {
+export async function logout() {
   await authAPI.logout();
   window.router.go('/');
-};
+}

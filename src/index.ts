@@ -5,9 +5,14 @@ import {Screens} from "./utils/getScreenComponent";
 import {defaultState} from "./store";
 
 import * as componentsMain from "./components";
+import * as componentsProfile from "./pages/profile/components";
 import * as componentsChat from "./pages/chat/components";
 
 Object.values(componentsMain).forEach((Component: any) => {
+  registerComponent(Component);
+});
+
+Object.values(componentsProfile).forEach((Component: any) => {
   registerComponent(Component);
 });
 

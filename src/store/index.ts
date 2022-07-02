@@ -1,7 +1,14 @@
 export const defaultState: AppState = {
   isAuthLoading: false,
   isSignUpLoading: false,
-  userId: null,
+  isProfileLoading: false,
+  isProfileSending: false,
+  isAvatarSending: false,
+  isPasswordSending: false,
+  user: null,
   loginFormError: null,
-  signUpFormError: null
+  signUpFormError: null,
+  sendProfileError: null,
+  sendPasswordError: null,
+  sendAvatarError: null
 };

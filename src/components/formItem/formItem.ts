@@ -4,6 +4,7 @@ import {validator} from "../../utils";
 interface FormItemProps {
   inputName: string;
   labelName: string;
+  value?: string;
   type: string;
   className?: string;
   onBlur?: (e: FocusEvent) => void;
@@ -14,17 +15,14 @@ interface FormItemProps {
 export class FormItem extends Block<FormItemProps> {
   static componentName = 'FormItem';
 
-  constructor({type, inputName, labelName, className}: FormItemProps) {
+  constructor(props: FormItemProps) {
     super({
-      type,
-      inputName,
-      labelName,
-      className,
       onBlur: (e) => this.handleEvent(e),
       onFocus: (e) => this.handleEvent(e),
       onInput: () => {
         this.refs.error.setProps({text: ''});
-      }
+      },
+      ...props
     });
   }
 
@@ -41,7 +39,7 @@ export class FormItem extends Block<FormItemProps> {
       <div class="form-item {{className}}">
         <div class="form-item__main">
           <label for="{{inputName}}" class="form-item__label">{{labelName}}</label>
-          {{{FormInput type=type name=inputName onBlur=onBlur onFocus=onFocus onInput=onInput}}}            
+          {{{FormInput type=type name=inputName onBlur=onBlur onFocus=onFocus onInput=onInput value=value}}}            
         </div>
         {{{FormError ref="error"}}}
       </div>

@@ -1,7 +1,6 @@
 import {authAPI} from "../../api";
 import {Dispatch} from "../../core/Store";
 import {apiHasError} from "../../utils";
-import {UserPayload} from "../../api/auth/types";
 
 export async function initApp(dispatch: Dispatch<AppState>) {
   try {
@@ -17,7 +16,11 @@ export async function initApp(dispatch: Dispatch<AppState>) {
       window.router.go('/messenger');
     }
 
-    dispatch({userId: (response as UserPayload).id});
+    dispatch({user: response});
+
+    if (path === '/settings') {
+      return response;
+    }
   } catch (err) {
     console.error(err);
   }

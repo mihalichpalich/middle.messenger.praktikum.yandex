@@ -2,7 +2,7 @@ import {Block, Router, Store} from "../../core";
 import {getFormData} from "../../utils";
 import {withRouter} from "../../utils/withRouter";
 import {withStore} from "../../utils/withStore";
-import {initApp, signUp} from "../../services";
+import {signUp} from "../../services";
 import {SignUpPayload} from "../../api/signUp/types";
 
 interface RegisterPageProps {
@@ -26,7 +26,7 @@ class RegisterPage extends Block<RegisterPageProps> {
 
   protected getStateFromProps() {
     this.state = {
-      onClickButton: (e: MouseEvent) => {
+      onSignUp: (e: MouseEvent) => {
         e.preventDefault();
         const values = getFormData('#register-form') as SignUpPayload;
         if (values) {
@@ -53,7 +53,7 @@ class RegisterPage extends Block<RegisterPageProps> {
             </div>
             {{{FormError text=formError}}}
             <div class="form__buttons-wrapper">
-              {{{FormButton text="Регистрация" onClick=onClickButton isLoading=formLoading}}}
+              {{{FormButton text="Регистрация" onClick=onSignUp isLoading=formLoading}}}
               {{{FormLink path="/" text="Вход"}}}
             </div>
           </form>

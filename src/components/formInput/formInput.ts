@@ -3,6 +3,7 @@ import {Block} from "../../core";
 interface FormInputProps {
   type: string;
   name: string;
+  value?: string;
   onBlur?: (e: FocusEvent) => void;
   onFocus?: (e: FocusEvent) => void;
   onInput?: () => void;
@@ -27,6 +28,6 @@ export class FormInput extends Block<FormInputProps> {
 
   render() {
     // language=hbs
-    return `<input class="form-input" type="{{type}}" name="{{name}}" value="{{value}}">`;
+    return `<input class="form-input" type="{{type}}" id="{{name}}" name="{{name}}" value="{{value}}">`;
   }
 }
