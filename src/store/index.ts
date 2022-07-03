@@ -10,6 +10,7 @@ export const defaultState: AppState = {
   chatId: null,
   chatUsers: [],
   chatMessages: [],
+  usersFound: [],
   loginFormError: null,
   signUpFormError: null,
   sendProfileError: null,

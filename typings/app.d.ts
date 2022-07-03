@@ -22,6 +22,7 @@ declare global {
     chatId: number | null;
     chatUsers: string[];
     chatMessages: ChatMessage[];
+    usersFound: User[];
     loginFormError: string | null;
     signUpFormError: string | null;
     sendProfileError: string | null;

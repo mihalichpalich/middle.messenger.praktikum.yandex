@@ -31,3 +31,16 @@ export type ChatMessagePayload = {
   user_id: string;
   content: string;
 };
+
+export type AddChatPayload = {
+  title: string;
+};
+
+export type UserSearchPayload = {
+  login: string;
+};
+
+export type AddUserPayload = {
+  users: number[];
+  chatId: number;
+}

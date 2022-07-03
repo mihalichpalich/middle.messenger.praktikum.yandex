@@ -6,7 +6,7 @@ export enum Methods {
 }
 
 export interface OptionType {
-  data?: Record<string, string>;
+  data?: Record<string, unknown>;
   method: Methods;
 }
 

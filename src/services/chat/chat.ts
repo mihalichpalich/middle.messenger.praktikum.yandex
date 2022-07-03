@@ -1,7 +1,7 @@
 import {chatApi} from "../../api";
 import {Dispatch} from "../../core/Store";
 import {apiHasError} from "../../utils";
-import {ChatMessagePayload} from "../../api/chat/types";
+import {ChatMessagePayload, AddChatPayload} from "../../api/chat/types";
 import {WS} from "../../core";
 
 export async function getChatList(dispatch: Dispatch<AppState>, _: AppState) {
@@ -64,3 +64,34 @@ export async function getChatToken(dispatch: Dispatch<AppState>, state: AppState
   }
 }
 
+export async function addChat(dispatch: Dispatch<AppState>, _: AppState, action: string) {
+  const response = await chatApi.addChat({title: action});
+
+  if (!apiHasError(response)) {
+    dispatch(getChatList);
+  }
+}
+
+export async function userSearch(dispatch: Dispatch<AppState>, _: AppState, action: string) {
+  const response = await chatApi.userSearch({login: action});
+
+  if (!apiHasError(response)) {
+    dispatch({usersFound: response});
+  }
+}
+
+export async function addUser(dispatch: Dispatch<AppState>, state: AppState, action: number) {
+  const response = await chatApi.addUser({chatId: state.chatId as number, users: [action]});
+
+  if (!apiHasError(response)) {
+    dispatch(getChatUsers, state.chatId);
+  }
+}
+
+export async function removeUser(dispatch: Dispatch<AppState>, state: AppState, action: number) {
+  const response = await chatApi.deleteUser({chatId: state.chatId as number, users: [action]});
+
+  if (!apiHasError(response)) {
+    dispatch(getChatUsers, state.chatId);
+  }
+}
