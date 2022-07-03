@@ -27,15 +27,16 @@
 
     &-button {
       width: 2vw;
-      height: 3.5vh;
       background-size: cover;
       background-color: $color-white;
 
-      &--hide {
-        background-image: url("../../static/icons/chat_list_top/hide.svg");
+      &--add {
+        height: 4.5vh;
+        background-image: url("../../static/icons/chat_list_top/add.svg");
       }
 
       &--profile {
+        height: 3.5vh;
         background-image: url("../../static/icons/chat_list_top/profile.svg");
       }
     }
@@ -79,12 +80,19 @@
       }
 
       &-button {
-        width: 2vw;
+        width: 2.3vw;
         height: 5vh;
-        background-image: url("../../static/icons/chat/chat_menu.svg");
         background-size: cover;
         background-position-x: center;
         background-color: transparent;
+
+        &--add-user {
+          background-image: url("../../static/icons/chat/add_user.svg");
+        }
+
+        &--remove-user {
+          background-image: url("../../static/icons/chat/remove_user.svg");
+        }
       }
     }
   }
@@ -100,7 +108,24 @@
   flex-direction: column;
   height: 82%;
   padding: 1.4vh 0.8vw;
+  overflow-y: scroll;
   background-image: url("../../static/img/chat/chat-cover.jpg");
   background-size: cover;
   background-color: aquamarine;
+
+  &__chat-not-chosen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-text {
+      padding: 1vh 1vw;
+      background: rgb(70 111 109 / 47%);
+      border-radius: 15px;
+      color: $color-white;
+      font-weight: bold;
+    }
+  }
 }

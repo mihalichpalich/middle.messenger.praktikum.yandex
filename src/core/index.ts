@@ -5,3 +5,4 @@ export {default as HTTPTransport} from './HTTPTransport';
 export {default as Router} from './Router';
 export {default as Store} from './Store';
 export {default as request} from './apiRequest';
+export {default as WS} from './WS';

@@ -38,7 +38,7 @@ class ProfilePage extends Block<ProfilePageProps> {
       sendProfileError: () => this.props.store.getState().sendProfileError,
       sendAvatarError: () => this.props.store.getState().sendAvatarError,
       sendPasswordError: () => this.props.store.getState().sendPasswordError,
-      avatar: () => `https://ya-praktikum.tech/api/v2/resources${this.props.store.getState().user?.avatar || ''}`,
+      avatar: () => `${process.env.IMG_ENDPOINT}${this.props.store.getState().user?.avatar || ''}`,
       firstName: () => this.props.store.getState().user?.first_name || '',
       secondName: () => this.props.store.getState().user?.second_name || '',
       displayName: () => this.props.store.getState().user?.display_name || '',
@@ -88,45 +88,51 @@ class ProfilePage extends Block<ProfilePageProps> {
       <main>
         <div class="profile-form__wrapper">
           {{{FormHeader title="Профиль"}}}
-          <form enctype="multipart/form-data" method="post" class="avatar-form" id="avatar-form">
-            <label for="avatar" class="form-item__label">Аватар</label>
-            <div class="avatar-form__input-block">
-              <input type="file" name="avatar" id="avatar" multiple accept="image/*,image/jpeg" class="avatar-form__file-input">
-              <div class="avatar-form__image-wrapper">
-                {{{Avatar avatarSrc=avatar}}}
-              </div>
-              {{{AvatarFormButton isLoading=isAvatarSending onClick=onSetAvatar}}}
+          <div class="profile-form__row">
+            <div class="profile-form__col">
+              <form enctype="multipart/form-data" method="post" class="avatar-form" id="avatar-form">
+                <label for="avatar" class="form-item__label">Аватар</label>
+                <div class="avatar-form__input-block">
+                  <input type="file" name="avatar" id="avatar" multiple accept="image/*,image/jpeg" class="avatar-form__file-input">
+                  <div class="avatar-form__image-wrapper">
+                    {{{Avatar avatarSrc=avatar}}}
+                  </div>
+                  {{{AvatarFormButton isLoading=isAvatarSending onClick=onSetAvatar}}}
+                </div>
+                {{{FormError text=sendAvatarError}}}
+              </form>
+              <form action="#" class="profile-form" method="post" id="profile-form">
+                <div class="profile-form__inputs-wrapper">
+                  {{{FormItem inputName="first_name" labelName="Имя" type="text" className="form-item--row" value=firstName}}}
+                  {{{FormItem inputName="second_name" labelName="Фамилия" type="text" className="form-item--row" value=secondName}}}
+                  {{{FormItem inputName="display_name" labelName="Имя пользователя" type="text" className="form-item--row" value=displayName}}}
+                  {{{FormItem inputName="login" labelName="Логин" type="text" className="form-item--row" value=login}}}
+                  {{{FormItem inputName="email" labelName="Email" type="email" className="form-item--row" value=email}}}
+                  {{{FormItem inputName="phone" labelName="Телефон" type="tel" className="form-item--row" value=phone}}}
+                  {{{FormError text=sendProfileError}}}
+                  <div class="profile-form__buttons-wrapper">
+                    {{{FormButton text="Сохранить" onClick=onSaveProfile className="form-button--green" isLoading=isProfileSending}}}
+                  </div>
+                </div>
+              </form>
             </div>
-            {{{FormError text=sendAvatarError}}}
-          </form>
-          <form action="#" class="profile-form" method="post" id="profile-form">
-            <div class="profile-form__inputs-wrapper">
-              {{{FormItem inputName="first_name" labelName="Имя" type="text" className="form-item--row" value=firstName}}}
-              {{{FormItem inputName="second_name" labelName="Фамилия" type="text" className="form-item--row" value=secondName}}}
-              {{{FormItem inputName="display_name" labelName="Имя пользователя" type="text" className="form-item--row" value=displayName}}}
-              {{{FormItem inputName="login" labelName="Логин" type="text" className="form-item--row" value=login}}}
-              {{{FormItem inputName="email" labelName="Email" type="email" className="form-item--row" value=email}}}
-              {{{FormItem inputName="phone" labelName="Телефон" type="tel" className="form-item--row" value=phone}}}
-              {{{FormError text=sendProfileError}}}
-              <div class="profile-form__buttons-wrapper">
-                {{{FormButton text="Сохранить" onClick=onSaveProfile className="form-button--green" isLoading=isProfileSending}}}
-              </div>
+            <div class="profile-form__col">
+              <form action="#" class="profile-form" method="post" id="password-form">
+                <div class="profile-form__inputs-wrapper">
+                  {{{FormItem inputName="oldPassword" labelName="Старый пароль" type="password" className="form-item--row"}}}
+                  {{{FormItem inputName="newPassword" labelName="Новый пароль" type="password" className="form-item--row"}}}
+                  {{{FormError text=sendPasswordError}}}
+                  <div class="profile-form__buttons-wrapper">
+                    {{{FormButton text="Изменить пароль" onClick=onChangePassword className="form-button--green" isLoading=isPasswordSending}}}
+                  </div>
+                </div>
+                <div class="profile-form__buttons-wrapper">
+                  {{{FormButton text="Перейти в мессенджер" onClick=onChat className="form-button" noSubmit=true}}}
+                  {{{FormButton text="Выход из приложения" onClick=onLogout className="form-button--red" noSubmit=true}}}
+                </div>
+              </form>
             </div>
-          </form>
-          <form action="#" class="profile-form" method="post" id="password-form">
-            <div class="profile-form__inputs-wrapper">
-              {{{FormItem inputName="oldPassword" labelName="Старый пароль" type="password" className="form-item--row"}}}
-              {{{FormItem inputName="newPassword" labelName="Новый пароль" type="password" className="form-item--row"}}}
-              {{{FormError text=sendPasswordError}}}
-              <div class="profile-form__buttons-wrapper">
-                {{{FormButton text="Изменить пароль" onClick=onChangePassword className="form-button--green" isLoading=isPasswordSending}}}                  
-              </div>
-            </div>
-            <div class="profile-form__buttons-wrapper">
-              {{{FormButton text="Перейти в мессенджер" onClick=onChat className="form-button" noSubmit=true}}}
-              {{{FormButton text="Выход из приложения" onClick=onLogout className="form-button--red" noSubmit=true}}}
-            </div>
-          </form>
+          </div>            
         </div>
       </main>
     `;

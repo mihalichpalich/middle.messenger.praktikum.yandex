@@ -178,7 +178,6 @@ export default class Block<P = any> {
       return;
     }
 
-
     Object.entries(events).forEach(([event, listener]) => {
       this._element!.removeEventListener(event, listener);
     });

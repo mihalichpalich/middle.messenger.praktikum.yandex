@@ -18,6 +18,10 @@ declare global {
     isAvatarSending: boolean;
     isPasswordSending: boolean;
     user: null | User;
+    chatList: ChatListItemData[];
+    chatId: number | null;
+    chatUsers: string[];
+    chatMessages: ChatMessage[];
     loginFormError: string | null;
     signUpFormError: string | null;
     sendProfileError: string | null;
@@ -34,6 +38,23 @@ declare global {
     avatar: string | null;
     email: string;
     phone: string;
+  }
+
+  export type ChatUser = User & {role: 'regular' | 'admin'};
+
+  export type ChatListItemData = {
+    id: number;
+    title: string;
+    chatAvatar: string | null;
+    unreadCount: number;
+    time: string;
+    text: string;
+  }
+
+  export type ChatMessage = {
+    time: string;
+    userId: string;
+    text: string;
   }
 }
 

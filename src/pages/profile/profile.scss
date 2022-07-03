@@ -7,15 +7,31 @@
 @import "./components/avatarFormButton/avatarFormButton";
 
 .profile-form {
-  width: 30%;
+  width: 50%;
 
   &__wrapper {
     width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1vh;
+  }
+
+  &__row {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__col {
+    width: 50%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 1vh;
   }
 
   &__inputs-wrapper {
@@ -32,7 +48,7 @@
 }
 
 .avatar-form {
-  width: 30%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
