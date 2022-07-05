@@ -5,7 +5,7 @@ interface ChatMessageProps {
   store: Store<AppState>;
   text: string;
   messageDate: string;
-  userId: string;
+  userId: number;
   isOutgoing?: boolean;
 }
 
@@ -15,9 +15,8 @@ class ChatMessage extends Block<ChatMessageProps> {
   constructor(props: ChatMessageProps) {
     super(props);
 
-
     this.setProps({
-      isOutgoing: props.userId === this.props.store.getState().user?.id.toString()
+      isOutgoing: props.userId === this.props.store.getState().user?.id
     });
   }
 

@@ -25,9 +25,8 @@ export default class WS {
       this.socket?.send(JSON.stringify({type: 'get old', content: '0'}));
     });
     this.socket?.addEventListener('message', (event: MessageEvent) => {
-      console.log('event', event);
       const data = JSON.parse(event.data);
-      if (data.type !== 'pong') {
+      if (data.type === 'message') {
         dispatch(JSON.parse(event.data));
       }
     });

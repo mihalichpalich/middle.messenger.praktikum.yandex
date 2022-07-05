@@ -5,15 +5,16 @@ export const defaultState: AppState = {
   isProfileSending: false,
   isAvatarSending: false,
   isPasswordSending: false,
+  loginFormError: null,
+  signUpFormError: null,
+  sendProfileError: null,
+  sendPasswordError: null,
+  sendAvatarError: null,
   user: null,
   chatList: [],
   chatId: null,
   chatUsers: [],
   chatMessages: [],
-  usersFound: [],
-  loginFormError: null,
-  signUpFormError: null,
-  sendProfileError: null,
-  sendPasswordError: null,
-  sendAvatarError: null
+  isAddChatFormOpened: false,
+  isAddUserFormOpened: false
 };

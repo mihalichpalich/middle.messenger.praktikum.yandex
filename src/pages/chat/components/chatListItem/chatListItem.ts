@@ -1,8 +1,7 @@
 import {Block, Store} from "../../../../core";
 import {withStore} from "../../../../utils";
-import {getChatUsers, getChatToken} from "../../../../services";
 
-interface ChatListItemProps {
+interface ChatListItemProps extends ClickableItemProps {
   store: Store<AppState>;
   avatarSrc: string;
   name: string;
@@ -10,25 +9,15 @@ interface ChatListItemProps {
   text: string;
   unread: number | null;
   id: number;
-  events?: {
-    click?: (e: FocusEvent) => void;
-  };
 }
 
 class ChatListItem extends Block<ChatListItemProps> {
   static componentName = 'ChatListItem';
 
   constructor({
-    ...props
+    onClick, ...props
   }: ChatListItemProps) {
-    async function onChatPick(e: FocusEvent) {
-      const element = e.currentTarget;
-      const chatId = Number((<Element>element).id);
-      await props.store.dispatch({chatId});
-      await props.store.dispatch(getChatUsers, chatId);
-      await props.store.dispatch(getChatToken, chatId);
-    }
-    super({...props, events: {click: onChatPick}})
+    super({...props, events: {click: onClick}})
   }
 
   render() {
@@ -37,7 +26,7 @@ class ChatListItem extends Block<ChatListItemProps> {
 
     // language=hbs
     return `
-      <li class="chat-list-item ${isActive ? 'chat-list-item--active' : ''}" id="{{id}}">
+      <li class="chat-list-item ${isActive ? 'chat-list-item--active' : ''}" data-chat-id="{{id}}">
         {{{Avatar avatarSrc=avatarSrc}}}
         <div class="chat-list-item__data">
           <div class="chat-list-item__data-part">

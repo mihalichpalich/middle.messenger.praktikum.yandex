@@ -6,6 +6,13 @@ declare global {
 
   export type Indexed = { [key: string]: any };
 
+  export interface ClickableItemProps {
+    onClick?: () => void;
+    events?: {
+      click?: () => void;
+    };
+  }
+
   export type APIError = {
     reason: string;
   };
@@ -17,17 +24,18 @@ declare global {
     isProfileSending: boolean;
     isAvatarSending: boolean;
     isPasswordSending: boolean;
-    user: null | User;
-    chatList: ChatListItemData[];
-    chatId: number | null;
-    chatUsers: string[];
-    chatMessages: ChatMessage[];
-    usersFound: User[];
     loginFormError: string | null;
     signUpFormError: string | null;
     sendProfileError: string | null;
     sendPasswordError: string | null;
     sendAvatarError: string | null;
+    user: null | User;
+    chatList: ChatListItemData[];
+    chatId: number | null;
+    chatUsers: string[];
+    chatMessages: ChatMessage[];
+    isAddChatFormOpened: boolean;
+    isAddUserFormOpened: boolean;
   };
 
   export type User = {

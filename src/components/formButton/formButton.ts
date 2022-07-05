@@ -1,12 +1,8 @@
 import {Block} from "../../core";
 
-interface FormButtonProps {
+interface FormButtonProps extends ClickableItemProps {
   text: string;
   className?: string;
-  onClick?: () => void;
-  events?: {
-    click?: () => void;
-  }
   noSubmit?: boolean;
   isLoading?: boolean;
 }

@@ -1,16 +1,9 @@
 import {Block} from "../../../../core";
 
-interface ChatFormButtonProps {
-  onClick?: () => void;
-  events?: {
-    click?: () => void;
-  };
-}
-
-export class ChatFormButton extends Block<ChatFormButtonProps> {
+export class ChatFormButton extends Block<ClickableItemProps> {
   static componentName = 'ChatSendButton';
 
-  constructor({onClick}: ChatFormButtonProps) {
+  constructor({onClick}: ClickableItemProps) {
     super({events: {click: onClick}});
   }
 

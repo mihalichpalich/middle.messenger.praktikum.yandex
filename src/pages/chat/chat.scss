@@ -5,6 +5,9 @@
 @import "./components/chatForm/chatForm";
 @import "./components/chatFormButton/chatFormButton";
 @import "./components/chatFormInput/chatFormInput";
+@import "./components/chatFeatureForm/chatFeatureForm";
+@import "./components/chatFeatureSendButton/chatFeatureSendButton";
+@import "./components/chatFeatureOpenButton/chatFeatureOpenButton";
 
 .chat {
   display: flex;
@@ -24,22 +27,6 @@
     height: 8%;
     padding: 1.4vh 0.8vw;
     border-bottom: 1px solid $color-darkgrey;
-
-    &-button {
-      width: 2vw;
-      background-size: cover;
-      background-color: $color-white;
-
-      &--add {
-        height: 4.5vh;
-        background-image: url("../../static/icons/chat_list_top/add.svg");
-      }
-
-      &--profile {
-        height: 3.5vh;
-        background-image: url("../../static/icons/chat_list_top/profile.svg");
-      }
-    }
 
     &-icon {
       width: 100%;
@@ -77,22 +64,6 @@
 
       &-name {
         font-weight: bold;
-      }
-
-      &-button {
-        width: 2.3vw;
-        height: 5vh;
-        background-size: cover;
-        background-position-x: center;
-        background-color: transparent;
-
-        &--add-user {
-          background-image: url("../../static/icons/chat/add_user.svg");
-        }
-
-        &--remove-user {
-          background-image: url("../../static/icons/chat/remove_user.svg");
-        }
       }
     }
   }

@@ -1,0 +1,13 @@
+@import "../../../../styles/variables";
+
+.chat-feature-form {
+  display: flex;
+  height: 5vh;
+  padding-left: 0.5vw;
+  border-bottom: 1px solid $color-grey;
+
+  &__input {
+    width: 70%;
+    font-size: $fs-text;
+  }
+}

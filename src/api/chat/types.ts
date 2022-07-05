@@ -4,7 +4,7 @@ export type ChatListPayload = {
   avatar: null | string;
   created_by: number;
   unread_count: number;
-  last_message: {
+  last_message?: {
     user: {
       first_name: string;
       second_name: string;

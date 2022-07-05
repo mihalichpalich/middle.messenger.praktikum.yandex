@@ -1,10 +1,6 @@
 import {Block} from "../../../../core";
 
-interface AvatarFormButtonProps {
-  onClick?: () => void;
-  events?: {
-    click?: () => void;
-  }
+interface AvatarFormButtonProps extends ClickableItemProps {
   isLoading?: boolean;
 }
 

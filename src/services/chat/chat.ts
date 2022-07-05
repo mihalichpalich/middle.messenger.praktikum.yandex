@@ -1,7 +1,7 @@
 import {chatApi} from "../../api";
 import {Dispatch} from "../../core/Store";
 import {apiHasError} from "../../utils";
-import {ChatMessagePayload, AddChatPayload} from "../../api/chat/types";
+import {ChatMessagePayload} from "../../api/chat/types";
 import {WS} from "../../core";
 
 export async function getChatList(dispatch: Dispatch<AppState>, _: AppState) {
@@ -11,10 +11,10 @@ export async function getChatList(dispatch: Dispatch<AppState>, _: AppState) {
     const chatList = response.map((chat) => ({
       id: chat.id,
       title: chat.title,
-      chatAvatar: chat.avatar || chat.last_message.user.avatar,
+      chatAvatar: `${process.env.IMG_ENDPOINT}${chat.avatar || chat.last_message?.user.avatar || ''}`,
       unreadCount: chat.unread_count,
-      time: chat.last_message.time,
-      text: chat.last_message.content
+      time: chat.last_message?.time || '',
+      text: chat.last_message?.content || ''
     }));
 
     dispatch({chatList});
@@ -75,12 +75,14 @@ export async function addChat(dispatch: Dispatch<AppState>, _: AppState, action:
 export async function userSearch(dispatch: Dispatch<AppState>, _: AppState, action: string) {
   const response = await chatApi.userSearch({login: action});
 
-  if (!apiHasError(response)) {
-    dispatch({usersFound: response});
+  if (apiHasError(response)) {
+    return;
   }
+
+  dispatch(addUser, response[0].id)
 }
 
-export async function addUser(dispatch: Dispatch<AppState>, state: AppState, action: number) {
+async function addUser(dispatch: Dispatch<AppState>, state: AppState, action: number) {
   const response = await chatApi.addUser({chatId: state.chatId as number, users: [action]});
 
   if (!apiHasError(response)) {
