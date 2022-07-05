@@ -1,6 +1,6 @@
 import {validator} from "./validator";
 
-export function getFormData (formSelector: string, redirectUrl?: string) {
+export function getFormData (formSelector: string): Record<string, unknown> | undefined {
   const form = document.querySelector(formSelector) as HTMLInputElement;
   const formItems = form.querySelectorAll('.form-item');
   const formValues: Record<string, string> = {};
@@ -18,9 +18,6 @@ export function getFormData (formSelector: string, redirectUrl?: string) {
   });
 
   if (Object.keys(formValues).length === formItems.length) {
-    console.log(formValues);
-    if (redirectUrl) {
-      location.href = redirectUrl;
-    }
+    return formValues;
   }
 }

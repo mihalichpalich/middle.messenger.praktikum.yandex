@@ -1,6 +1,6 @@
 import {Block} from "../../core";
 
-export class Error404 extends Block {
+export default class Error404 extends Block {
   static componentName = 'Error404';
 
   render() {

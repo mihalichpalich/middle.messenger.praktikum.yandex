@@ -1,16 +1,43 @@
-import {Block} from "../../core";
+import {Block, Router, Store} from "../../core";
 import {getFormData} from "../../utils";
+import {withRouter} from "../../utils/withRouter";
+import {withStore} from "../../utils/withStore";
+import {login, initApp} from "../../services";
+import {LoginPayload} from "../../api/auth/types";
 
-export class LoginPage extends Block {
+interface LoginPageProps {
+  router: Router;
+  store: Store<AppState>;
+  formError?: () => string | null;
+  formLoading?: () => boolean;
+}
+
+class LoginPage extends Block<LoginPageProps> {
   static componentName = 'LoginPage';
 
-  constructor() {
-    super({
+  constructor(props: LoginPageProps) {
+    super(props);
+
+    this.setProps({
+      formError: () => this.props.store.getState().loginFormError,
+      formLoading: () => this.props.store.getState().isAuthLoading,
+    });
+  }
+
+  componentDidMount() {
+    this.props.store.dispatch(initApp);
+  }
+
+  protected getStateFromProps() {
+    this.state = {
       onClickButton: (e: MouseEvent) => {
         e.preventDefault();
-        getFormData('#auth-form', '/chat.html');
+        const values = getFormData('#auth-form') as LoginPayload;
+        if (values) {
+          this.props.store.dispatch(login, values);
+        }
       }
-    });
+    }
   }
 
   render() {
@@ -24,9 +51,10 @@ export class LoginPage extends Block {
               {{{FormItem inputName="login" labelName="Логин" type="text"}}}
               {{{FormItem inputName="password" labelName="Пароль" type="password"}}}
             </div>
+            {{{FormError text=formError}}}
             <div class="form__buttons-wrapper">
-              {{{FormButton text="Войти" onClick=onClickButton}}}
-              {{{FormLink path="./register.html" text="Регистрация"}}}
+              {{{FormButton text="Войти" onClick=onClickButton isLoading=formLoading}}}
+              {{{FormLink path="/sign-up" text="Регистрация"}}}
             </div>
           </form>
         </div> 
@@ -34,3 +62,5 @@ export class LoginPage extends Block {
     `;
   }
 }
+
+export default withRouter(withStore(LoginPage));

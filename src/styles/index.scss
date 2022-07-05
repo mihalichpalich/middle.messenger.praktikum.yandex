@@ -1,16 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 @import "./variables";
 @import "./reset";
+@import "../pages/login/login";
+@import "../pages/register/register";
+@import "../pages/chat/chat";
+@import "../pages/profile/profile";
+@import "../pages/error404/error404";
+@import "../pages/error500/error500";
 
 body {
   font-family: Roboto, sans-serif;
   font-size: $fs-text;
-}
-
-#app {
-  height: 100%;
-}
-
-main {
-  height: 100%;
 }

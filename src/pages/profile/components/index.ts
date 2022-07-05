@@ -1,0 +1,1 @@
+export {AvatarFormButton} from './avatarFormButton/avatarFormButton';

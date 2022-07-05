@@ -5,7 +5,7 @@ interface FormLinkProps {
   text: string;
 }
 
-export class FormLink extends Block {
+export class FormLink extends Block<FormLinkProps> {
   static componentName = 'FormLink';
 
   constructor({path, text}: FormLinkProps) {

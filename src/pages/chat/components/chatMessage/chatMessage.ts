@@ -1,24 +1,23 @@
-import {Block} from "../../../../core";
+import {Block, Store} from "../../../../core";
+import {withStore} from "../../../../utils";
 
 interface ChatMessageProps {
+  store: Store<AppState>;
   text: string;
   messageDate: string;
-  isOutgoing: boolean;
-  check_sent: boolean;
-  check_read: boolean;
+  userId: number;
+  isOutgoing?: boolean;
 }
 
-export class ChatMessage extends Block {
+class ChatMessage extends Block<ChatMessageProps> {
   static componentName = 'ChatMessage';
 
-  constructor({
-    text,
-    messageDate,
-    isOutgoing,
-    check_sent,
-    check_read
-  }: ChatMessageProps) {
-    super({text, messageDate, isOutgoing, check_sent, check_read})
+  constructor(props: ChatMessageProps) {
+    super(props);
+
+    this.setProps({
+      isOutgoing: props.userId === this.props.store.getState().user?.id
+    });
   }
 
   render() {
@@ -26,14 +25,10 @@ export class ChatMessage extends Block {
     return `
       <li class="chat-message{{#if isOutgoing}} chat-message--my{{/if}}">
         <p class="chat-message__text">{{text}}</p>
-        <span class="chat-message__date">{{messageDate}}</span>
-        {{#if check_sent}}
-          <span class="chat-message__status chat-message__status--sent"></span>
-        {{/if}}
-        {{#if check_read}}
-          <span class="chat-message__status chat-message__status--read"></span>
-        {{/if}}
+        <time class="chat-message__date">{{messageDate}}</time>
       </li>
     `
   }
 }
+
+export default withStore(ChatMessage);

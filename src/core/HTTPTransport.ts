@@ -1,48 +1,46 @@
-enum Methods {
+export enum Methods {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
   DELETE = 'DELETE'
 }
 
-interface OptionType {
-  headers: Record<string, string>;
-  data: Record<string, string>;
+export interface OptionType {
+  data?: Record<string, unknown>;
   method: Methods;
 }
 
 export default class HTTPTransport {
-  queryStringify = (data: OptionType["data"]) => {
-    return Object.entries(data).reduce((res, item, index) => {
-      const [key, value] = item;
-      const str = index === 0 ? '?' : '&';
-
-      return res.concat(`${str}${key}=${value.toString()}`);
-    }, '');
-  };
-
-  request = (url: string, options: OptionType, timeout = 5000) => {
-    const {headers = {}, data, method} = options;
+  request = (url: string, options: OptionType, type = "application/json") => {
+    const {data, method} = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open(method, method === Methods.GET ? (url + this.queryStringify(data)) : url);
 
+      xhr.open(method, url);
       xhr.onload = function() {
-        resolve(xhr);
+        resolve(this.response);
       };
 
-      Object.entries(headers).forEach(([name, value]) => xhr.setRequestHeader(name, value));
+      if (type === "application/json") {
+        xhr.setRequestHeader("Content-type", type);
+      } else {
+        xhr.setRequestHeader('accept', 'application/json');
+      }
 
-      xhr.timeout = timeout;
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-      xhr.ontimeout = reject;
+      xhr.timeout = 15000;
+      xhr.onabort = () => reject({ resolve: "abort" });
+      xhr.onerror = () => reject({ resolve: "network error" });
+      xhr.ontimeout = () => reject({ resolve: "timeout" });
+      xhr.withCredentials = true;
+      xhr.responseType = "json";
 
       if (method === Methods.GET || !data) {
         xhr.send();
-      } else {
+      } else if (type === "multipart/form-data") {
         xhr.send(data as any);
+      } else {
+        xhr.send(JSON.stringify(data));
       }
     });
   };
