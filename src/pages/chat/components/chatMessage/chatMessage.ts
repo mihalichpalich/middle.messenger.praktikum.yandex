@@ -13,11 +13,7 @@ class ChatMessage extends Block<ChatMessageProps> {
   static componentName = 'ChatMessage';
 
   constructor(props: ChatMessageProps) {
-    super(props);
-
-    this.setProps({
-      isOutgoing: props.userId === this.props.store.getState().user?.id
-    });
+    super({...props, isOutgoing: props.userId === props.store.getState().user?.id});
   }
 
   render() {

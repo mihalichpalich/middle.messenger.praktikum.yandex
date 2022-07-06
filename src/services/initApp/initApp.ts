@@ -1,11 +1,10 @@
-import {authAPI} from "../../api";
-import {Dispatch} from "../../core/Store";
-import {apiHasError} from "../../utils";
+import {AuthAPI} from "../../api";
+import {apiHasError, getAvatarImage} from "../../utils";
 
 export async function initApp(dispatch: Dispatch<AppState>) {
   try {
     const path = window.location.pathname;
-    const response = await authAPI.me();
+    const response = await AuthAPI.me();
 
     if (apiHasError(response)) {
       window.router.go('/');
@@ -16,12 +15,12 @@ export async function initApp(dispatch: Dispatch<AppState>) {
       window.router.go('/messenger');
     }
 
-    dispatch({user: response});
+    dispatch({user: {...response, avatar: getAvatarImage(response.avatar)}});
 
     if (path === '/settings') {
       return response;
     }
-  } catch (err) {
-    console.error(err);
+  } catch (e) {
+    throw e;
   }
 }

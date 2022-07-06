@@ -6,11 +6,11 @@ export enum Methods {
 }
 
 export interface OptionType {
-  data?: Record<string, unknown>;
+  data?: Record<string, unknown> | FormData;
   method: Methods;
 }
 
-export default class HTTPTransport {
+export class HTTPTransport {
   request = (url: string, options: OptionType, type = "application/json") => {
     const {data, method} = options;
 

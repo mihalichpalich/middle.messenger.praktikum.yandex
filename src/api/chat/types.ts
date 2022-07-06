@@ -5,15 +5,7 @@ export type ChatListPayload = {
   created_by: number;
   unread_count: number;
   last_message?: {
-    user: {
-      first_name: string;
-      second_name: string;
-      display_name: null | string;
-      login: string;
-      avatar: null | string;
-      email: string;
-      phone: string;
-    },
+    user: Omit<User, 'id' | 'display_name'>,
     time: string;
     content: string;
     id: number;

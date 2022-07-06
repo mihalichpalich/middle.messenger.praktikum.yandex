@@ -11,7 +11,7 @@ export enum Screens {
   Error500 = 'error500'
 }
 
-const map: Record<Screens, BlockClass<any>> = {
+const SCREEN_MAP: Record<Screens, BlockClass<any>> = {
   [Screens.Login]: LoginPage,
   [Screens.SignUp]: RegisterPage,
   [Screens.Profile]: ProfilePage,
@@ -21,5 +21,5 @@ const map: Record<Screens, BlockClass<any>> = {
 };
 
 export const getScreenComponent = (screen: Screens): BlockClass<any> => {
-  return map[screen];
+  return SCREEN_MAP[screen];
 };

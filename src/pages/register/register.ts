@@ -16,11 +16,10 @@ class RegisterPage extends Block<RegisterPageProps> {
   static componentName = 'RegisterPage';
 
   constructor(props: RegisterPageProps) {
-    super(props);
-
-    this.setProps({
-      formError: () => this.props.store.getState().signUpFormError,
-      formLoading: () => this.props.store.getState().isSignUpLoading,
+    super({
+      ...props,
+      formError: () => props.store.getState().signUpFormError,
+      formLoading: () => props.store.getState().isSignUpLoading,
     });
   }
 

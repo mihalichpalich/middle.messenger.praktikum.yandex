@@ -6,7 +6,7 @@ type WithStateProps = { store: Store<AppState> };
 export function withStore<P extends WithStateProps>(WrappedBlock: BlockClass<P>) {
   // @ts-expect-error No base constructor has the specified
   return class extends WrappedBlock<P> {
-    public static componentName = WrappedBlock.componentName || WrappedBlock.name;
+    static componentName = WrappedBlock.componentName || WrappedBlock.name;
 
     constructor(props: P) {
       super({ ...props, store: window.store });

@@ -72,6 +72,13 @@
 .chat-list {
   display: flex;
   flex-direction: column;
+
+  &__loading {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .chat-messages {

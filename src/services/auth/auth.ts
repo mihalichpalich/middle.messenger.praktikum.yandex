@@ -1,32 +1,40 @@
-import {authAPI} from "../../api";
+import {AuthAPI} from "../../api";
 import {LoginPayload} from "../../api/auth/types";
-import {Dispatch} from "../../core/Store";
-import {apiHasError} from "../../utils";
+import {apiHasError, getAvatarImage} from "../../utils";
 
-export async function login(dispatch: Dispatch<AppState>, _: AppState, action: LoginPayload) {
-  dispatch({isAuthLoading: true});
+export async function login(dispatch: Dispatch<AppState>, _: AppState, loginData: LoginPayload) {
+  try {
+    dispatch({isAuthLoading: true});
 
-  const response = await authAPI.login(action);
+    const response = await AuthAPI.login(loginData);
 
-  if (apiHasError(response)) {
-    dispatch({isAuthLoading: false, loginFormError: response.reason});
-    return;
+    if (apiHasError(response)) {
+      dispatch({isAuthLoading: false, loginFormError: response.reason});
+      return;
+    }
+
+    const responseUser = await AuthAPI.me();
+
+    if (apiHasError(responseUser)) {
+      dispatch(logout);
+      return;
+    }
+
+    dispatch({user: {...responseUser, avatar: getAvatarImage(responseUser.avatar)}});
+    dispatch({loginFormError: null});
+    window.router.go('/messenger');
+  } catch (e) {
+    throw e;
+  } finally {
+    dispatch({isAuthLoading: false});
   }
-
-  const responseUser = await authAPI.me();
-
-  dispatch({isAuthLoading: false, loginFormError: null});
-
-  if (apiHasError(responseUser)) {
-    dispatch(logout);
-    return;
-  }
-
-  dispatch({user: responseUser});
-  window.router.go('/messenger');
 }
 
 export async function logout() {
-  await authAPI.logout();
-  window.router.go('/');
+  try {
+    await AuthAPI.logout();
+    window.router.go('/');
+  } catch (e) {
+    throw e;
+  }
 }

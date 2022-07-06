@@ -1,9 +1,9 @@
-import HTTPTransport from "./HTTPTransport";
+import {HTTPTransport} from "./HTTPTransport";
 import {OptionType, Methods} from "./HTTPTransport";
 
 const http = new HTTPTransport();
 
-export default function request<T extends any>(path: string, options: OptionType, type?: string) {
+export function request<T extends any>(path: string, options: OptionType, type?: string) {
   return http.request(
     `${process.env.API_ENDPOINT}/${path}`,
     options,

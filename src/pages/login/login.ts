@@ -16,11 +16,10 @@ class LoginPage extends Block<LoginPageProps> {
   static componentName = 'LoginPage';
 
   constructor(props: LoginPageProps) {
-    super(props);
-
-    this.setProps({
-      formError: () => this.props.store.getState().loginFormError,
-      formLoading: () => this.props.store.getState().isAuthLoading,
+    super({
+      ...props,
+      formError: () => props.store.getState().loginFormError,
+      formLoading: () => props.store.getState().isAuthLoading,
     });
   }
 
