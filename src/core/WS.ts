@@ -26,7 +26,7 @@ export default class WS {
     });
     this.socket?.addEventListener('message', (event: MessageEvent) => {
       const data = JSON.parse(event.data);
-      if (data.type === 'message') {
+      if (data.type !== 'pong' && data.type !== 'user connected') {
         dispatch(JSON.parse(event.data));
       }
     });
