@@ -1,4 +1,4 @@
-export default class WS {
+export class WS {
   static __instance: WS;
   protected url: string;
   protected socket: WebSocket | null;

@@ -6,6 +6,17 @@ declare global {
 
   export type Indexed = { [key: string]: any };
 
+  export type Dispatch<State> = (
+    nextStateOrAction: Partial<State> | Action<State>,
+    payload?: any,
+  ) => void;
+
+  export type Action<State, T> = (
+    dispatch: Dispatch<State>,
+    state: State,
+    payload: T,
+  ) => void;
+
   export interface ClickableItemProps {
     onClick?: () => void;
     events?: {
@@ -34,6 +45,7 @@ declare global {
     chatId: number | null;
     chatUsers: string[];
     chatMessages: ChatMessage[];
+    isChatListLoading: boolean;
     isAddChatFormOpened: boolean;
     isAddUserFormOpened: boolean;
   };

@@ -15,6 +15,7 @@ export const defaultState: AppState = {
   chatId: null,
   chatUsers: [],
   chatMessages: [],
+  isChatListLoading: false,
   isAddChatFormOpened: false,
   isAddUserFormOpened: false
 };

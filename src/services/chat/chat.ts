@@ -1,99 +1,139 @@
-import {chatApi} from "../../api";
-import {Dispatch} from "../../core/Store";
-import {apiHasError} from "../../utils";
+import {ChatApi} from "../../api";
+import {apiHasError, getAvatarImage} from "../../utils";
 import {ChatMessagePayload} from "../../api/chat/types";
 import {WS} from "../../core";
 
 export async function getChatList(dispatch: Dispatch<AppState>, _: AppState) {
-  const response = await chatApi.getChatList();
+  try {
+    const response = await ChatApi.getChatList();
 
-  if (!apiHasError(response)) {
-    const chatList = response.map((chat) => ({
-      id: chat.id,
-      title: chat.title,
-      chatAvatar: `${process.env.IMG_ENDPOINT}${chat.avatar || chat.last_message?.user.avatar || ''}`,
-      unreadCount: chat.unread_count,
-      time: chat.last_message?.time || '',
-      text: chat.last_message?.content || ''
-    }));
+    if (!apiHasError(response)) {
+      const chatList = response.map((chat) => ({
+        id: chat.id,
+        title: chat.title,
+        chatAvatar: getAvatarImage(chat.avatar || chat.last_message?.user.avatar || null),
+        unreadCount: chat.unread_count,
+        time: chat.last_message?.time || '',
+        text: chat.last_message?.content || ''
+      }));
 
-    dispatch({chatList});
+      dispatch({chatList});
+    }
+  } catch (e) {
+    throw e;
   }
 }
 
-export async function getChatUsers(dispatch: Dispatch<AppState>, _: AppState, action: number | string) {
-  const response = await chatApi.getChatUsers(action);
-
-  if (!apiHasError(response)) {
-    const chatUsers = response.map((user) => user.display_name || `${user.first_name} ${user.second_name}`);
-
-    dispatch({chatUsers});
+export async function getChatData(dispatch: Dispatch<AppState>, _: AppState, chatId: string) {
+  try {
+    dispatch({chatId: Number(chatId)});
+    dispatch(getChatUsers, chatId);
+    dispatch(getChatToken, chatId);
+  } catch (e) {
+    throw e;
   }
 }
 
-export async function getChatToken(dispatch: Dispatch<AppState>, state: AppState, action: number | string) {
-  const response = await chatApi.getChatToken(action);
+export async function getChatUsers(dispatch: Dispatch<AppState>, _: AppState, chatId: string) {
+  try {
+    const response = await ChatApi.getChatUsers(chatId);
 
-  if (!apiHasError(response)) {
-    const chatToken = response.token;
-    const socket = new WS();
-    const userId = state.user?.id;
-    const chatId = action;
-    socket.close();
-    socket.getMessages(`/${userId}/${chatId}/${chatToken}`, getMessages);
+    if (!apiHasError(response)) {
+      const chatUsers = response.map((user) => user.display_name || `${user.first_name} ${user.second_name}`);
+
+      dispatch({chatUsers});
+    }
+  } catch (e) {
+    throw e;
   }
+}
 
-  function getMessages(data: MessageEvent["data"]) {
-    let chatMessages;
+export async function getChatToken(dispatch: Dispatch<AppState>, state: AppState, chatId: string) {
+  try {
+    const response = await ChatApi.getChatToken(chatId);
 
-    if (Array.isArray(data)) {
-      chatMessages = data.map((message: ChatMessagePayload) => ({
-        userId: message.user_id,
-        time: message.time,
-        text: message.content
-      })).reverse();
-      localStorage.setItem('messages', JSON.stringify(chatMessages));
-    } else {
-      const messages = localStorage.getItem('messages');
-      const messagesArr = JSON.parse(messages as string);
-      chatMessages = [...messagesArr, {userId: data.user_id, time: data.time, text: data.content}]
-      localStorage.setItem('messages', JSON.stringify(chatMessages));
+    if (!apiHasError(response)) {
+      const chatToken = response.token;
+      const socket = new WS();
+      const userId = state.user?.id;
+      socket.close();
+      socket.getMessages(`/${userId}/${chatId}/${chatToken}`, getMessages);
     }
 
-    dispatch({chatMessages});
+    function getMessages(data: MessageEvent["data"]) {
+      let chatMessages;
+
+      if (Array.isArray(data)) {
+        chatMessages = data.map((message: ChatMessagePayload) => ({
+          userId: message.user_id,
+          time: message.time,
+          text: message.content
+        })).reverse();
+        localStorage.setItem('messages', JSON.stringify(chatMessages));
+      } else {
+        const messages = localStorage.getItem('messages');
+        const messagesArr = JSON.parse(messages as string);
+        chatMessages = [...messagesArr, {userId: data.user_id, time: data.time, text: data.content}]
+        localStorage.setItem('messages', JSON.stringify(chatMessages));
+      }
+
+      dispatch({chatMessages});
+      dispatch({isChatListLoading: false});
+    }
+  } catch (e) {
+    throw e;
   }
 }
 
-export async function addChat(dispatch: Dispatch<AppState>, _: AppState, action: string) {
-  const response = await chatApi.addChat({title: action});
+export async function addChat(dispatch: Dispatch<AppState>, _: AppState, title: string) {
+  try {
+    const response = await ChatApi.addChat({title});
 
-  if (!apiHasError(response)) {
-    dispatch(getChatList);
+    if (!apiHasError(response)) {
+      dispatch(getChatList);
+      dispatch({isAddChatFormOpened: false});
+    }
+  } catch (e) {
+    throw e;
   }
 }
 
-export async function userSearch(dispatch: Dispatch<AppState>, _: AppState, action: string) {
-  const response = await chatApi.userSearch({login: action});
+export async function userSearch(dispatch: Dispatch<AppState>, _: AppState, login: string) {
+  try {
+    const response = await ChatApi.userSearch({login});
 
-  if (apiHasError(response)) {
-    return;
-  }
+    if (apiHasError(response)) {
+      return;
+    }
 
-  dispatch(addUser, response[0].id)
-}
+    const userId = response[0]?.id;
 
-async function addUser(dispatch: Dispatch<AppState>, state: AppState, action: number) {
-  const response = await chatApi.addUser({chatId: state.chatId as number, users: [action]});
-
-  if (!apiHasError(response)) {
-    dispatch(getChatUsers, state.chatId);
+    dispatch(addUser, userId);
+  } catch (e) {
+    throw e;
   }
 }
 
-export async function removeUser(dispatch: Dispatch<AppState>, state: AppState, action: number) {
-  const response = await chatApi.deleteUser({chatId: state.chatId as number, users: [action]});
+async function addUser(dispatch: Dispatch<AppState>, state: AppState, userId: number) {
+  try {
+    const response = await ChatApi.addUser({chatId: state.chatId as number, users: [userId]});
 
-  if (!apiHasError(response)) {
-    dispatch(getChatUsers, state.chatId);
+    if (!apiHasError(response)) {
+      dispatch(getChatUsers, state.chatId);
+    }
+  } catch (e) {
+    throw e;
+  }
+}
+
+export async function removeUser(dispatch: Dispatch<AppState>, state: AppState, userId: number) {
+  try {
+    const response = await ChatApi.deleteUser({chatId: state.chatId as number, users: [userId]});
+
+    if (!apiHasError(response)) {
+      dispatch(getChatUsers, state.chatId);
+    }
+  } catch (e) {
+    throw e;
   }
 }

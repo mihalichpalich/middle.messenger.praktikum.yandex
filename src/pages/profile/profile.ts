@@ -29,22 +29,21 @@ class ProfilePage extends Block<ProfilePageProps> {
   static componentName = 'ProfilePage';
 
   constructor(props: ProfilePageProps) {
-    super(props);
-
-    this.setProps({
-      isProfileSending: () => this.props.store.getState().isProfileSending,
-      isAvatarSending: () => this.props.store.getState().isAvatarSending,
-      isPasswordSending: () => this.props.store.getState().isPasswordSending,
-      sendProfileError: () => this.props.store.getState().sendProfileError,
-      sendAvatarError: () => this.props.store.getState().sendAvatarError,
-      sendPasswordError: () => this.props.store.getState().sendPasswordError,
-      avatar: () => `${process.env.IMG_ENDPOINT}${this.props.store.getState().user?.avatar || ''}`,
-      firstName: () => this.props.store.getState().user?.first_name || '',
-      secondName: () => this.props.store.getState().user?.second_name || '',
-      displayName: () => this.props.store.getState().user?.display_name || '',
-      login: () => this.props.store.getState().user?.login || '',
-      email: () => this.props.store.getState().user?.email || '',
-      phone: () => this.props.store.getState().user?.phone || '',
+    super({
+      ...props,
+      isProfileSending: () => props.store.getState().isProfileSending,
+      isAvatarSending: () => props.store.getState().isAvatarSending,
+      isPasswordSending: () => props.store.getState().isPasswordSending,
+      sendProfileError: () => props.store.getState().sendProfileError,
+      sendAvatarError: () => props.store.getState().sendAvatarError,
+      sendPasswordError: () => props.store.getState().sendPasswordError,
+      avatar: () => props.store.getState().user?.avatar,
+      firstName: () => props.store.getState().user?.first_name || '',
+      secondName: () => props.store.getState().user?.second_name || '',
+      displayName: () => props.store.getState().user?.display_name || '',
+      login: () => props.store.getState().user?.login || '',
+      email: () => props.store.getState().user?.email || '',
+      phone: () => props.store.getState().user?.phone || '',
     });
   }
 

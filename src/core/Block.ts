@@ -13,7 +13,7 @@ interface BlockMeta<P = any> {
 
 type Events = Values<typeof Block.EVENTS>;
 
-export default class Block<P = any> {
+export class Block<P = any> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -21,7 +21,7 @@ export default class Block<P = any> {
     FLOW_RENDER: 'flow:render',
   } as const;
 
-  public id = nanoid(6);
+  id = nanoid(6);
   private readonly _meta: BlockMeta;
 
   protected _element: Nullable<HTMLElement> = null;
@@ -31,11 +31,11 @@ export default class Block<P = any> {
   eventBus: () => EventBus<Events>;
 
   protected state: any = {};
-  public refs: {[key: string]: Block} = {};
+  refs: {[key: string]: Block} = {};
 
   static componentName: string;
 
-  public constructor(props?: P) {
+  constructor(props?: P) {
     const eventBus = new EventBus<Events>();
 
     this._meta = {

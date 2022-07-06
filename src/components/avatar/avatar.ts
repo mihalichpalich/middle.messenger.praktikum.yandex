@@ -12,6 +12,7 @@ export class Avatar extends Block<AvatarProps> {
   }
 
   render() {
+
     // language=hbs
     return `<img src="{{avatarSrc}}" alt="Аватар" class="avatar">`;
   }

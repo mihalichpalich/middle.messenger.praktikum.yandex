@@ -1,12 +1,13 @@
 import {Block, Router, Store} from "../../core";
 import {withRouter} from "../../utils/withRouter";
 import {withStore} from "../../utils/withStore";
-import {getChatList, getChatToken, getChatUsers, initApp, addChat, userSearch} from "../../services";
+import {getChatList, getChatData, initApp, addChat, userSearch} from "../../services";
 
 interface ChatProps {
   router: Router;
   store: Store<AppState>;
   chatList: () => ChatListItemData[];
+  isChatListLoading: () => boolean;
   isAddChatFormOpened: () => boolean;
   isAddUserFormOpened: () => boolean;
   chatId: () => number | null;
@@ -17,14 +18,14 @@ class ChatPage extends Block<ChatProps> {
   static componentName = 'ChatPage';
 
   constructor(props: ChatProps) {
-    super(props);
-
-    this.setProps({
-      chatList: () => this.props.store.getState().chatList,
-      isAddChatFormOpened: () => this.props.store.getState().isAddChatFormOpened,
-      isAddUserFormOpened: () => this.props.store.getState().isAddUserFormOpened,
-      chatId: () => this.props.store.getState().chatId,
-      chatMessages: () => this.props.store.getState().chatMessages,
+    super({
+      ...props,
+      chatList: () => props.store.getState().chatList,
+      isChatListLoading: () => props.store.getState().isChatListLoading,
+      isAddChatFormOpened: () => props.store.getState().isAddChatFormOpened,
+      isAddUserFormOpened: () => props.store.getState().isAddUserFormOpened,
+      chatId: () => props.store.getState().chatId,
+      chatMessages: () => props.store.getState().chatMessages,
     });
   }
 
@@ -50,12 +51,10 @@ class ChatPage extends Block<ChatProps> {
         }
       },
       onChatPick: (e: FocusEvent) => {
+        this.props.store.dispatch({isChatListLoading: true});
         const element = e.currentTarget as Element;
         const chatId = element.getAttribute('data-chat-id');
-        this.props.store.dispatch({chatId: Number(chatId)});
-        this.props.store.dispatch(getChatUsers, chatId);
-        this.props.store.dispatch(getChatToken, chatId);
-        this.props.store.dispatch({isAddChatFormOpened: false});
+        this.props.store.dispatch(getChatData, chatId);
       },
       onAddUser: () => {
         const input = this.element?.querySelector(`[name="add-user"]`) as HTMLInputElement;
@@ -98,17 +97,21 @@ class ChatPage extends Block<ChatProps> {
               }}}
             {{/if}}           
             <ul class="chat-list">
-              {{#each chatList}}
-                {{{ChatListItem
-                  avatarSrc=chatAvatar
-                  name=title
-                  text=text
-                  messageDate=time
-                  unread=unreadCount
-                  id=id
-                  onClick=@root.onChatPick
-                }}}
-              {{/each}}
+              {{#if isChatListLoading}}
+                <span class="chat-list__loading">Загрузка...</span>
+              {{else}}
+                {{#each chatList}}
+                  {{{ChatListItem
+                    avatarSrc=chatAvatar
+                    name=title
+                    text=text
+                    messageDate=time
+                    unread=unreadCount
+                    id=id
+                    onClick=@root.onChatPick
+                  }}}
+                {{/each}}
+              {{/if}}
             </ul>
           </div>
           <div class="chat__dialog">
