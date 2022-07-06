@@ -123,17 +123,18 @@ class ChatPage extends Block<ChatProps> {
               </nav>
               <ul class="chat-messages">
                 {{#if chatId}}
-                  <div class="chat-messages__chat-not-chosen">
-                    <span class="chat-messages__chat-not-chosen-text">Выберите, кому хотели бы написать</span>
-                  </div>
-                {{/if}}
-                {{#each chatMessages}}
-                  {{{ChatMessage
-                    text=text
-                    messageDate=time
-                    userId=userId
-                  }}}
-                {{/each}}   
+                    {{#each chatMessages}}
+                      {{{ChatMessage
+                        text=text
+                        messageDate=time
+                        userId=userId
+                      }}}
+                    {{/each}}
+                  {{else}} 
+                    <div class="chat-messages__chat-not-chosen">
+                      <span class="chat-messages__chat-not-chosen-text">Выберите, кому хотели бы написать</span>
+                    </div>
+                {{/if}}  
               </ul>
               {{#if chatId}}
                 {{{ChatForm}}}
