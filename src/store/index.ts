@@ -1,0 +1,21 @@
+export const defaultState: AppState = {
+  isAuthLoading: false,
+  isSignUpLoading: false,
+  isProfileLoading: false,
+  isProfileSending: false,
+  isAvatarSending: false,
+  isPasswordSending: false,
+  loginFormError: null,
+  signUpFormError: null,
+  sendProfileError: null,
+  sendPasswordError: null,
+  sendAvatarError: null,
+  user: null,
+  chatList: [],
+  chatId: null,
+  chatUsers: [],
+  chatMessages: [],
+  isChatListLoading: false,
+  isAddChatFormOpened: false,
+  isAddUserFormOpened: false
+};

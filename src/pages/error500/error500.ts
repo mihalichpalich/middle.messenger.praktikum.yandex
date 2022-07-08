@@ -1,6 +1,6 @@
 import {Block} from "../../core";
 
-export class Error500 extends Block {
+export default class Error500 extends Block {
   static componentName = 'Error500';
 
   render() {

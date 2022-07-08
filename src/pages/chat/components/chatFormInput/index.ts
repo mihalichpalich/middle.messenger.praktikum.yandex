@@ -1,1 +1,0 @@
-export {ChatFormInput as default} from './chatFormInput';

@@ -1,0 +1,29 @@
+.chat-feature-open-button {
+  background-size: cover;
+  background-position-x: center;
+  background-color: transparent;
+
+  &--add-chat {
+    width: 2vw;
+    height: 4.5vh;
+    background-image: url("../../static/icons/chat_list_top/add.svg");
+  }
+
+  &--profile {
+    width: 2vw;
+    height: 3.5vh;
+    background-image: url("../../static/icons/chat_list_top/profile.svg");
+  }
+
+  &--add-user {
+    width: 2.3vw;
+    height: 5vh;
+    background-image: url("../../static/icons/chat/add_user.svg");
+  }
+
+  &--remove-user {
+    width: 2.3vw;
+    height: 5vh;
+    background-image: url("../../static/icons/chat/remove_user.svg");
+  }
+}

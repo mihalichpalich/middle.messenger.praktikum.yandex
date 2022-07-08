@@ -1,40 +1,55 @@
-import {Block} from "../../../../core";
+import {Block, Store} from "../../../../core";
+import {withStore} from "../../../../utils";
 
-interface ChatListItemProps {
+interface ChatListItemProps extends ClickableItemProps {
+  store: Store<AppState>;
   avatarSrc: string;
   name: string;
   messageDate: string;
   text: string;
   unread: number | null;
+  id: number;
 }
 
-export class ChatListItem extends Block {
+class ChatListItem extends Block<ChatListItemProps> {
   static componentName = 'ChatListItem';
 
-  constructor({avatarSrc, name, messageDate, text, unread}: ChatListItemProps) {
-    super({avatarSrc, name, messageDate, text, unread})
+  constructor({
+    onClick, ...props
+  }: ChatListItemProps) {
+    super({...props, events: {click: onClick}})
   }
 
   render() {
+    const state = this.props.store.getState();
+    const isActive = state.chatId === +this.props.id;
+
     // language=hbs
     return `
-      <li class="chat-list-item">
+      <li class="chat-list-item ${isActive ? 'chat-list-item--active' : ''}" data-chat-id="{{id}}">
         {{{Avatar avatarSrc=avatarSrc}}}
         <div class="chat-list-item__data">
           <div class="chat-list-item__data-part">
             <span class="chat-list-item__data-name">{{name}}</span>
-            <span>{{messageDate}}</span>
+            <time>{{messageDate}}</time>
           </div>
           <div class="chat-list-item__data-part">
             <span class="chat-list-item__data-text">{{text}}</span>
-            {{#if unread}}
-              <div class="chat-list-item__data-unread">
-                <span>{{unread}}</span>
-              </div>
-            {{/if}}
+              ${
+                Number(this.props.unread) && !isActive
+                  ? `
+                      <div class="chat-list-item__data-unread">
+                        <span>${this.props.unread}</span>
+                      </div>
+                    `
+                  : ''
+              }
           </div>
         </div>
       </li>
     `
   }
 }
+
+export default withStore(ChatListItem);
+

@@ -4,7 +4,7 @@ interface FormHeaderProps {
   title: string;
 }
 
-export class FormHeader extends Block {
+export class FormHeader extends Block<FormHeaderProps> {
   static componentName = 'FormHeader';
 
   constructor({title}: FormHeaderProps) {

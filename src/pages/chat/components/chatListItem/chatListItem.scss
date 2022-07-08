@@ -8,6 +8,18 @@
   padding: 1.4vh 0.8vw;
   border-bottom: 1px solid $color-lightgrey;
 
+  &--active {
+    background-color: $color-blue;
+
+    .chat-list-item__data-part {
+      color: $color-white;
+    }
+
+    .chat-list-item__data-name {
+      color: $color-white;
+    }
+  }
+
   &__data {
     display: flex;
     height: 100%;
