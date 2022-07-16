@@ -16,10 +16,6 @@ export async function initApp(dispatch: Dispatch<AppState>) {
     }
 
     dispatch({user: {...response, avatar: getAvatarImage(response.avatar)}});
-
-    if (path === '/settings') {
-      return response;
-    }
   } catch (e) {
     throw e;
   }

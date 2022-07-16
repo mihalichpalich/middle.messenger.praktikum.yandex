@@ -6,3 +6,4 @@ export {ChatFormInput} from './chatFormInput/chatFormInput';
 export {ChatFeatureForm} from './chatFeatureForm/chatFeatureForm';
 export {ChatFeatureSendButton} from './chatFeatureSendButton/chatFeatureSendButton';
 export {ChatFeatureOpenButton} from './chatFeatureOpenButton/chatFeatureOpenButton';
+export {ChatInfoMessage} from './chatInfoMessage/chatInfoMessage';

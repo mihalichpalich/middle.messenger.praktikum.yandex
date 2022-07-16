@@ -1,8 +1,6 @@
-import {Block, WS, Store} from "../../../../core";
-import {withStore} from "../../../../utils";
+import {Block, WS} from "../../../../core";
 
 interface ChatFormProps {
-  store: Store<AppState>;
   onClickButton: () => void;
   onInput: () => void;
 }
@@ -46,4 +44,4 @@ class ChatForm extends Block<ChatFormProps> {
   }
 }
 
-export default withStore(ChatForm);
+export default ChatForm;

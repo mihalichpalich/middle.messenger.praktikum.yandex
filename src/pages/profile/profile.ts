@@ -8,47 +8,32 @@ import {ProfilePayload, PasswordPayload} from "../../api/profile/types";
 interface ProfilePageProps {
   router: Router;
   store: Store<AppState>;
-  onLogout?: () => void;
-  isProfileSending?: () => boolean;
-  isAvatarSending?: () => boolean;
-  isPasswordSending?: () => boolean;
-  getUser?: () => User | null;
-  sendProfileError?: () => string | null;
-  sendAvatarError?: () => string | null;
-  sendPasswordError?: () => string | null;
-  avatar?: () => string | null | undefined;
-  firstName?: () => string;
-  secondName?: () => string;
-  displayName?: () => string;
-  login?: () => string;
-  email?: () => string;
-  phone?: () => string;
+  dispatch: Dispatch<AppState>;
+  isProfileSending?: boolean;
+  isAvatarSending?: boolean;
+  isPasswordSending?: boolean;
+  getUser?: null;
+  sendProfileError?: string | null;
+  sendAvatarError?: string | null;
+  sendPasswordError?: string | null;
+  avatar?: string | null | undefined;
+  firstName?: string;
+  secondName?: string;
+  displayName?: string;
+  login?: string;
+  email?: string;
+  phone?: string;
 }
 
 class ProfilePage extends Block<ProfilePageProps> {
   static componentName = 'ProfilePage';
 
   constructor(props: ProfilePageProps) {
-    super({
-      ...props,
-      isProfileSending: () => props.store.getState().isProfileSending,
-      isAvatarSending: () => props.store.getState().isAvatarSending,
-      isPasswordSending: () => props.store.getState().isPasswordSending,
-      sendProfileError: () => props.store.getState().sendProfileError,
-      sendAvatarError: () => props.store.getState().sendAvatarError,
-      sendPasswordError: () => props.store.getState().sendPasswordError,
-      avatar: () => props.store.getState().user?.avatar,
-      firstName: () => props.store.getState().user?.first_name || '',
-      secondName: () => props.store.getState().user?.second_name || '',
-      displayName: () => props.store.getState().user?.display_name || '',
-      login: () => props.store.getState().user?.login || '',
-      email: () => props.store.getState().user?.email || '',
-      phone: () => props.store.getState().user?.phone || '',
-    });
+    super(props);
   }
 
   componentDidMount() {
-    this.props.store.dispatch(initApp);
+    this.props.dispatch(initApp);
   }
 
   protected getStateFromProps() {
@@ -57,14 +42,14 @@ class ProfilePage extends Block<ProfilePageProps> {
         e.preventDefault();
         const values = getFormData('#profile-form') as ProfilePayload;
         if (values) {
-          this.props.store.dispatch(sendProfile, values);
+          this.props.dispatch(sendProfile, values);
         }
       },
       onChangePassword: (e: MouseEvent) => {
         e.preventDefault();
         const values = getFormData('#password-form') as PasswordPayload;
         if (values) {
-          this.props.store.dispatch(changePassword, values);
+          this.props.dispatch(changePassword, values);
         }
       },
       onSetAvatar: (e: MouseEvent) => {
@@ -73,11 +58,11 @@ class ProfilePage extends Block<ProfilePageProps> {
         const formData: any = new FormData();
         if (inputFile.files && inputFile!.files[0]) {
           formData.append("avatar", inputFile!.files[0]);
-          this.props.store.dispatch(setAvatar, formData);
+          this.props.dispatch(setAvatar, formData);
         }
       },
       onChat: () => window.router.go('/messenger'),
-      onLogout: () => this.props.store.dispatch(logout),
+      onLogout: () => this.props.dispatch(logout),
     };
   }
 
@@ -138,4 +123,22 @@ class ProfilePage extends Block<ProfilePageProps> {
   }
 }
 
-export default withRouter(withStore(ProfilePage));
+function mapStateToProps(state: AppState) {
+  return {
+    isProfileSending: state.isProfileSending,
+    isAvatarSending: state.isAvatarSending,
+    isPasswordSending: state.isPasswordSending,
+    sendProfileError: state.sendProfileError,
+    sendAvatarError: state.sendAvatarError,
+    sendPasswordError: state.sendPasswordError,
+    avatar: state.user?.avatar,
+    firstName: state.user?.first_name || '',
+    secondName: state.user?.second_name || '',
+    displayName: state.user?.display_name || '',
+    login: state.user?.login || '',
+    email: state.user?.email || '',
+    phone: state.user?.phone || '',
+  };
+}
+
+export default withRouter(withStore(ProfilePage, mapStateToProps));
