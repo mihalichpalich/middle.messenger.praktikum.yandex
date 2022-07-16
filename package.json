@@ -20,8 +20,6 @@
   },
   "homepage": "https://github.com/mihalichpalich/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars": "1.0.9",
-    "@parcel/transformer-sass": "2.3.2",
     "@types/node": "17.0.41",
     "@typescript-eslint/eslint-plugin": "5.27.1",
     "@typescript-eslint/parser": "5.27.1",
@@ -31,8 +29,6 @@
     "eslint-plugin-import": "2.26.0",
     "html-webpack-plugin": "5.5.0",
     "mini-css-extract-plugin": "2.6.1",
-    "parcel": "2.3.2",
-    "parcel-plugin-handlebars-precompile": "1.0.2",
     "postcss": "8.4.14",
     "postcss-scss": "4.0.4",
     "sass-loader": "13.0.2",
