@@ -7,10 +7,6 @@ export interface BlockClass<P> extends Function {
   componentName?: string;
 }
 
-interface BlockMeta<P = any> {
-  props: P;
-}
-
 type Events = Values<typeof Block.EVENTS>;
 
 export class Block<P = any> {
@@ -22,25 +18,20 @@ export class Block<P = any> {
   } as const;
 
   id = nanoid(6);
-  private readonly _meta: BlockMeta;
 
   protected _element: Nullable<HTMLElement> = null;
-  protected readonly props: P;
+  readonly props: P;
   protected children: {[id: string]: Block} = {};
 
   eventBus: () => EventBus<Events>;
 
   protected state: any = {};
-  refs: {[key: string]: Block} = {};
+  protected readonly refs: {[key: string]: Block} = {};
 
   static componentName: string;
 
   constructor(props?: P) {
     const eventBus = new EventBus<Events>();
-
-    this._meta = {
-      props,
-    };
 
     this.getStateFromProps(props)
 
@@ -74,11 +65,11 @@ export class Block<P = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
   }
 
-  private _componentDidMount(props: P) {
-    this.componentDidMount(props);
+  private _componentDidMount() {
+    this.componentDidMount();
   }
 
-  componentDidMount(props: P) {
+  componentDidMount() {
     return;
   }
 
