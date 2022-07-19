@@ -61,6 +61,9 @@
     "nanoid": "4.0.0"
   },
   "lint-staged": {
+    "./src/**/*.test.ts": [
+      "npm test --watchAll=false --findRelatedTests --bail"
+    ],
     "./src/**/*.ts": [
       "npm test --watchAll=false --findRelatedTests --bail"
     ]
