@@ -1,6 +1,6 @@
-import {ProfileApi} from "../../api";
-import {apiHasError, getAvatarImage} from "../../utils";
-import {ProfilePayload, PasswordPayload} from "../../api/profile/types";
+import {ProfileApi} from "@/api";
+import {apiHasError, getAvatarImage} from "@/utils";
+import {ProfilePayload, PasswordPayload} from "@/api/profile/types";
 
 export async function sendProfile(dispatch: Dispatch<AppState>, state: AppState, action: ProfilePayload) {
   try {

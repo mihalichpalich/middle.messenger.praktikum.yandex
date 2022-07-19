@@ -1,5 +1,5 @@
-import {AuthAPI} from "../../api";
-import {apiHasError, getAvatarImage} from "../../utils";
+import {AuthAPI} from "@/api";
+import {apiHasError, getAvatarImage} from "@/utils";
 
 export async function initApp(dispatch: Dispatch<AppState>) {
   try {

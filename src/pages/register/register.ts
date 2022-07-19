@@ -1,9 +1,9 @@
-import {Block, Router, Store} from "../../core";
-import {getFormData} from "../../utils";
-import {withRouter} from "../../utils/withRouter";
-import {withStore} from "../../utils/withStore";
-import {signUp} from "../../services";
-import {SignUpPayload} from "../../api/signUp/types";
+import {Block, Router, Store} from "@/core";
+import {getFormData} from "@/utils";
+import {withRouter} from "@/utils/withRouter";
+import {withStore} from "@/utils/withStore";
+import {signUp} from "@/services";
+import {SignUpPayload} from "@/api/signUp/types";
 
 interface RegisterPageProps {
   router: Router;

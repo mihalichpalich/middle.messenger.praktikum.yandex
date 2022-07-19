@@ -1,6 +1,6 @@
-import {AuthAPI} from "../../api";
-import {LoginPayload} from "../../api/auth/types";
-import {apiHasError, getAvatarImage} from "../../utils";
+import {AuthAPI} from "@/api";
+import {LoginPayload} from "@/api/auth/types";
+import {apiHasError, getAvatarImage} from "@/utils";
 
 export async function login(dispatch: Dispatch<AppState>, _: AppState, loginData: LoginPayload) {
   try {

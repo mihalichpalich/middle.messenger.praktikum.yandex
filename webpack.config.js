@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -21,6 +22,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
+    plugins: [new TsconfigPathsPlugin()],
     alias: {
       'handlebars': 'handlebars/dist/handlebars.js',
     },

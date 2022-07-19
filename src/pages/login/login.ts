@@ -1,9 +1,9 @@
-import {Block, Router, Store} from "../../core";
-import {getFormData} from "../../utils";
-import {withRouter} from "../../utils/withRouter";
-import {withStore} from "../../utils/withStore";
-import {login, initApp} from "../../services";
-import {LoginPayload} from "../../api/auth/types";
+import {Block, Router, Store} from "@/core";
+import {getFormData} from "@/utils";
+import {withRouter} from "@/utils/withRouter";
+import {withStore} from "@/utils/withStore";
+import {login, initApp} from "@/services";
+import {LoginPayload} from "@/api/auth/types";
 
 interface LoginPageProps {
   router: Router;

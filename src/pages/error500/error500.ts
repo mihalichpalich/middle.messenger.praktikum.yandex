@@ -1,4 +1,4 @@
-import {Block} from "../../core";
+import {Block} from "@/core";
 
 export default class Error500 extends Block {
   static componentName = 'Error500';

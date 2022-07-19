@@ -1,7 +1,7 @@
-import {Block, Router, Store} from "../../core";
-import {withRouter} from "../../utils/withRouter";
-import {withStore} from "../../utils/withStore";
-import {getChatList, getChatData, initApp, addChat, userSearch} from "../../services";
+import {Block, Router, Store} from "@/core";
+import {withRouter} from "@/utils/withRouter";
+import {withStore} from "@/utils/withStore";
+import {getChatList, getChatData, initApp, addChat, userSearch} from "@/services";
 
 interface ChatProps {
   router: Router;

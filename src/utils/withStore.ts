@@ -1,5 +1,5 @@
-import {Store} from "../core";
-import {BlockClass} from "../core/Block";
+import {Store} from "@/core";
+import {BlockClass} from "@/core/Block";
 
 type WithStateProps = { store: Store<AppState> };
 

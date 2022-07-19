@@ -1,9 +1,9 @@
-import {Block, Router, Store} from "../../core";
-import {getFormData} from "../../utils";
-import {withRouter} from "../../utils/withRouter";
-import {withStore} from "../../utils/withStore";
-import {initApp, logout, sendProfile, changePassword, setAvatar} from "../../services";
-import {ProfilePayload, PasswordPayload} from "../../api/profile/types";
+import {Block, Router, Store} from "@/core";
+import {getFormData} from "@/utils";
+import {withRouter} from "@/utils/withRouter";
+import {withStore} from "@/utils/withStore";
+import {initApp, logout, sendProfile, changePassword, setAvatar} from "@/services";
+import {ProfilePayload, PasswordPayload} from "@/api/profile/types";
 
 interface ProfilePageProps {
   router: Router;

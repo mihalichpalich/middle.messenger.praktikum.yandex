@@ -1,7 +1,7 @@
-import {ChatApi} from "../../api";
-import {apiHasError, getAvatarImage} from "../../utils";
-import {ChatMessagePayload} from "../../api/chat/types";
-import {WS} from "../../core";
+import {ChatApi} from "@/api";
+import {apiHasError, getAvatarImage} from "@/utils";
+import {ChatMessagePayload} from "@/api/chat/types";
+import {WS} from "@/core";
 
 export async function getChatList(dispatch: Dispatch<AppState>, _: AppState) {
   try {

@@ -1,4 +1,4 @@
-import {Block, WS} from "../../../../core";
+import {Block, WS} from "@/core";
 
 interface ChatFormProps {
   onClickButton: () => void;

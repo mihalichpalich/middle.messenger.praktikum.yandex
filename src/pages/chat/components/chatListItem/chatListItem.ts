@@ -1,5 +1,5 @@
-import {Block, Store} from "../../../../core";
-import {withStore} from "../../../../utils";
+import {Block, Store} from "@/core";
+import {withStore} from "@/utils/withStore";
 
 interface ChatListItemProps extends ClickableItemProps {
   store: Store<AppState>;

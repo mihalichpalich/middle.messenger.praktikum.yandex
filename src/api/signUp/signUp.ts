@@ -1,4 +1,4 @@
-import {request} from "../../core";
+import {request} from "@/core";
 import {SignUpPayload, SignUpResponse} from "./types";
 
 export const SignUpAPI = {
