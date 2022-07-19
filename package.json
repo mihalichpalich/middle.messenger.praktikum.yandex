@@ -65,7 +65,7 @@
       "npm test --watchAll=false --findRelatedTests --bail"
     ],
     "./src/**/*.ts": [
-      "npm test --watchAll=false --findRelatedTests --bail"
+      "npm-run-all --parallel lint:*"
     ]
   }
 }
