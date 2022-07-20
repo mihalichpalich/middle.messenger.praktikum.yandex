@@ -4,19 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 module.exports = {
-  mode: isProduction ? 'production' : 'development',
   entry: './src/index.ts',
-  devServer: {
-    static: path.join(__dirname, 'dist'),
-    historyApiFallback: true,
-    compress: true,
-    port: 4000,
-    open: true,
-    hot: true
-  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
