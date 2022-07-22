@@ -1,4 +1,4 @@
-import {request} from "../../core";
+import {request} from "@/core";
 import {ProfilePayload, PasswordPayload} from "./types";
 
 export const ProfileApi = {

@@ -19,7 +19,7 @@ export class HTTPTransport {
 
       xhr.open(method, url);
       xhr.onload = function() {
-        resolve(this.response);
+        resolve(xhr);
       };
 
       if (type === "application/json") {

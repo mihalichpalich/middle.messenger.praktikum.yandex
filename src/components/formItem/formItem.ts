@@ -1,5 +1,5 @@
-import {Block} from "../../core";
-import {validator} from "../../utils";
+import {Block} from "@/core";
+import {validator} from "@/utils";
 
 interface FormItemProps {
   inputName: string;

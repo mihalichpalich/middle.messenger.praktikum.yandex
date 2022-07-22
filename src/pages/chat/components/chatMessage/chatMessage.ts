@@ -1,10 +1,11 @@
-import {Block, Store} from "../../../../core";
-import {withStore} from "../../../../utils";
+import {Block, Store} from "@/core";
+import {withStore} from "@/utils/withStore";
 
 interface ChatMessageProps {
   store: Store<AppState>;
   text: string;
   messageDate: string;
+  stateUserId: number;
   userId: number;
   isOutgoing?: boolean;
 }
@@ -13,7 +14,7 @@ class ChatMessage extends Block<ChatMessageProps> {
   static componentName = 'ChatMessage';
 
   constructor(props: ChatMessageProps) {
-    super({...props, isOutgoing: props.userId === props.store.getState().user?.id});
+    super({...props, isOutgoing: props.userId === props.stateUserId});
   }
 
   render() {
@@ -27,4 +28,10 @@ class ChatMessage extends Block<ChatMessageProps> {
   }
 }
 
-export default withStore(ChatMessage);
+function mapStateToProps(state: AppState) {
+  return {
+    stateUserId: state.user?.id
+  };
+}
+
+export default withStore(ChatMessage, mapStateToProps);

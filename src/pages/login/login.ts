@@ -1,30 +1,27 @@
-import {Block, Router, Store} from "../../core";
-import {getFormData} from "../../utils";
-import {withRouter} from "../../utils/withRouter";
-import {withStore} from "../../utils/withStore";
-import {login, initApp} from "../../services";
-import {LoginPayload} from "../../api/auth/types";
+import {Block, Router, Store} from "@/core";
+import {getFormData} from "@/utils";
+import {withRouter} from "@/utils/withRouter";
+import {withStore} from "@/utils/withStore";
+import {login, initApp} from "@/services";
+import {LoginPayload} from "@/api/auth/types";
 
 interface LoginPageProps {
   router: Router;
   store: Store<AppState>;
-  formError?: () => string | null;
-  formLoading?: () => boolean;
+  dispatch: Dispatch<AppState>;
+  formError?: string | null;
+  formLoading?: boolean;
 }
 
 class LoginPage extends Block<LoginPageProps> {
   static componentName = 'LoginPage';
 
   constructor(props: LoginPageProps) {
-    super({
-      ...props,
-      formError: () => props.store.getState().loginFormError,
-      formLoading: () => props.store.getState().isAuthLoading,
-    });
+    super(props);
   }
 
   componentDidMount() {
-    this.props.store.dispatch(initApp);
+    this.props.dispatch(initApp);
   }
 
   protected getStateFromProps() {
@@ -33,7 +30,7 @@ class LoginPage extends Block<LoginPageProps> {
         e.preventDefault();
         const values = getFormData('#auth-form') as LoginPayload;
         if (values) {
-          this.props.store.dispatch(login, values);
+          this.props.dispatch(login, values);
         }
       }
     }
@@ -62,4 +59,11 @@ class LoginPage extends Block<LoginPageProps> {
   }
 }
 
-export default withRouter(withStore(LoginPage));
+function mapStateToProps(state: AppState) {
+  return {
+    formError: state.loginFormError,
+    formLoading: state.isAuthLoading,
+  };
+}
+
+export default withRouter(withStore(LoginPage, mapStateToProps));

@@ -9,7 +9,7 @@ export function request<T extends any>(path: string, options: OptionType, type?:
     options,
     type
   ).then((data) => {
-    return data as unknown as T | APIError;
+    return (data as XMLHttpRequest).response as unknown as T | APIError;
   });
 }
 

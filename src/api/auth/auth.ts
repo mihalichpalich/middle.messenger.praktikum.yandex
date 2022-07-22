@@ -1,4 +1,4 @@
-import {request} from "../../core";
+import {request} from "@/core";
 import {LoginPayload} from "./types";
 
 export const AuthAPI = {

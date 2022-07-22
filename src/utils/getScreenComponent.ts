@@ -1,4 +1,4 @@
-import {BlockClass} from "../core/Block";
+import {BlockClass} from "@/core/Block";
 
 import {LoginPage, RegisterPage, ChatPage, ProfilePage, Error404, Error500} from '../pages';
 

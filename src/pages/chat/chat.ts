@@ -1,73 +1,65 @@
-import {Block, Router, Store} from "../../core";
-import {withRouter} from "../../utils/withRouter";
-import {withStore} from "../../utils/withStore";
-import {getChatList, getChatData, initApp, addChat, userSearch} from "../../services";
+import {Block, Router, Store} from "@/core";
+import {withRouter} from "@/utils/withRouter";
+import {withStore} from "@/utils/withStore";
+import {getChatList, getChatData, initApp, addChat, userSearch} from "@/services";
 
 interface ChatProps {
   router: Router;
   store: Store<AppState>;
-  chatList: () => ChatListItemData[];
-  isChatListLoading: () => boolean;
-  isAddChatFormOpened: () => boolean;
-  isAddUserFormOpened: () => boolean;
-  chatId: () => number | null;
-  chatMessages: () => ChatMessage[];
+  dispatch: Dispatch<AppState>;
+  chatList: ChatListItemData[];
+  isChatListLoading: boolean;
+  isAddChatFormOpened: boolean;
+  isAddUserFormOpened: boolean;
+  chatId: number | null;
+  chatMessages: ChatMessage[];
+  chatUsers: string[];
 }
 
 class ChatPage extends Block<ChatProps> {
   static componentName = 'ChatPage';
 
   constructor(props: ChatProps) {
-    super({
-      ...props,
-      chatList: () => props.store.getState().chatList,
-      isChatListLoading: () => props.store.getState().isChatListLoading,
-      isAddChatFormOpened: () => props.store.getState().isAddChatFormOpened,
-      isAddUserFormOpened: () => props.store.getState().isAddUserFormOpened,
-      chatId: () => props.store.getState().chatId,
-      chatMessages: () => props.store.getState().chatMessages,
-    });
+    super(props);
   }
 
   componentDidMount() {
-    this.props.store.dispatch(initApp);
-    this.props.store.dispatch(getChatList);
+    this.props.dispatch(initApp);
+    this.props.dispatch(getChatList);
   }
 
   getStateFromProps() {
     this.state = {
       onAddChatOpen: () => {
-        this.props.store.dispatch({isAddChatFormOpened: true});
+        this.props.dispatch({isAddChatFormOpened: true});
       },
       onAddUserOpen: () => {
-        this.props.store.dispatch({isAddUserFormOpened: true});
+        this.props.dispatch({isAddUserFormOpened: true});
       },
       onAddChat: () => {
         const input = this.element?.querySelector(`[name="add-chat"]`) as HTMLInputElement;
         const inputText = input.value;
         if (inputText) {
-          this.props.store.dispatch(addChat, inputText);
-          this.props.store.dispatch({isAddChatFormOpened: false});
+          this.props.dispatch(addChat, inputText);
+          this.props.dispatch({isAddChatFormOpened: false});
         }
       },
       onChatPick: (e: FocusEvent) => {
-        this.props.store.dispatch({isChatListLoading: true});
+        this.props.dispatch({isChatListLoading: true});
         const element = e.currentTarget as Element;
         const chatId = element.getAttribute('data-chat-id');
-        this.props.store.dispatch(getChatData, chatId);
+        this.props.dispatch(getChatData, chatId);
       },
       onAddUser: () => {
         const input = this.element?.querySelector(`[name="add-user"]`) as HTMLInputElement;
         const inputText = input.value;
-        this.props.store.dispatch(userSearch, inputText);
-        this.props.store.dispatch({isAddUserFormOpened: false});
+        this.props.dispatch(userSearch, inputText);
+        this.props.dispatch({isAddUserFormOpened: false});
       }
     }
   }
 
   render() {
-    const state = this.props.store.getState();
-
     // language=hbs
     return `
       <main>
@@ -116,28 +108,28 @@ class ChatPage extends Block<ChatProps> {
           </div>
           <div class="chat__dialog">
               <nav class="chat__dialog-header">
-                <span class="chat__dialog-header-name">${state.chatUsers.join(', ')}</span>
-                {{#if chatId}}
-                  <div class="chat__dialog-header-button-block">                    
-                    {{{ChatFeatureOpenButton buttonType="add-user" onClick=onAddUserOpen}}}                    
-                    {{{ChatFeatureOpenButton buttonType="remove-user"}}}
-                  </div>
-                {{/if}}        
+                {{#unless isChatListLoading}}
+                  <span class="chat__dialog-header-name">${this.props.chatUsers.join(', ')}</span>
+                  {{#if chatId}}
+                    <div class="chat__dialog-header-button-block">                    
+                      {{{ChatFeatureOpenButton buttonType="add-user" onClick=onAddUserOpen}}}                    
+                      {{{ChatFeatureOpenButton buttonType="remove-user"}}}
+                    </div>
+                  {{/if}}
+                {{/unless}}         
               </nav>
               <ul class="chat-messages">
-                {{#if chatId}}
-                    {{#each chatMessages}}
-                      {{{ChatMessage
-                        text=text
-                        messageDate=time
-                        userId=userId
-                      }}}
-                    {{/each}}
-                  {{else}} 
-                    <div class="chat-messages__chat-not-chosen">
-                      <span class="chat-messages__chat-not-chosen-text">Выберите, кому хотели бы написать</span>
-                    </div>
-                {{/if}}  
+                {{#unless isChatListLoading}}
+                    {{#if chatId}}
+                        {{#each chatMessages}}
+                          {{{ChatMessage text=text messageDate=time userId=userId}}}
+                        {{/each}}
+                      {{else}} 
+                        {{{ChatInfoMessage text="Выберите, кому хотели бы написать"}}}
+                    {{/if}}  
+                  {{else}}
+                    {{{ChatInfoMessage text="Загрузка..."}}}
+                {{/unless}}
               </ul>
               {{#if chatId}}
                 {{{ChatForm}}}
@@ -149,4 +141,16 @@ class ChatPage extends Block<ChatProps> {
   }
 }
 
-export default withRouter(withStore(ChatPage));
+function mapStateToProps(state: AppState) {
+  return {
+    chatList: state.chatList,
+    isChatListLoading: state.isChatListLoading,
+    isAddChatFormOpened: state.isAddChatFormOpened,
+    isAddUserFormOpened: state.isAddUserFormOpened,
+    chatId: state.chatId,
+    chatMessages: state.chatMessages,
+    chatUsers: state.chatUsers
+  };
+}
+
+export default withRouter(withStore(ChatPage, mapStateToProps));

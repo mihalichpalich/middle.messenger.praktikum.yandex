@@ -1,6 +1,6 @@
-import {SignUpAPI} from "../../api";
-import {SignUpPayload} from "../../api/signUp/types";
-import {apiHasError} from "../../utils";
+import {SignUpAPI} from "@/api";
+import {SignUpPayload} from "@/api/signUp/types";
+import {apiHasError} from "@/utils";
 
 export async function signUp(dispatch: Dispatch<AppState>, _: AppState, action: SignUpPayload) {
   try {

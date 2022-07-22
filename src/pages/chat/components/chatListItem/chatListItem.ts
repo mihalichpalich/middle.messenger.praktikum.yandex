@@ -1,5 +1,5 @@
-import {Block, Store} from "../../../../core";
-import {withStore} from "../../../../utils";
+import {Block, Store} from "@/core";
+import {withStore} from "@/utils/withStore";
 
 interface ChatListItemProps extends ClickableItemProps {
   store: Store<AppState>;
@@ -9,6 +9,7 @@ interface ChatListItemProps extends ClickableItemProps {
   text: string;
   unread: number | null;
   id: number;
+  stateChatId: number | null;
 }
 
 class ChatListItem extends Block<ChatListItemProps> {
@@ -21,8 +22,7 @@ class ChatListItem extends Block<ChatListItemProps> {
   }
 
   render() {
-    const state = this.props.store.getState();
-    const isActive = state.chatId === +this.props.id;
+    const isActive = this.props.stateChatId === +this.props.id;
 
     // language=hbs
     return `
@@ -51,5 +51,11 @@ class ChatListItem extends Block<ChatListItemProps> {
   }
 }
 
-export default withStore(ChatListItem);
+function mapStateToProps(state: AppState) {
+  return {
+    stateChatId: state.chatId
+  };
+}
+
+export default withStore(ChatListItem, mapStateToProps);
 

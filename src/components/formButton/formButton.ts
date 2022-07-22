@@ -1,4 +1,4 @@
-import {Block} from "../../core";
+import {Block} from "@/core";
 
 interface FormButtonProps extends ClickableItemProps {
   text: string;

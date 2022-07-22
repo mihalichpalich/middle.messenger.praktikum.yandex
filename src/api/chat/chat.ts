@@ -1,4 +1,4 @@
-import {request} from "../../core";
+import {request} from "@/core";
 import {ChatListPayload, ChatTokenItem, AddChatPayload, UserSearchPayload, AddUserPayload} from "./types";
 
 export const ChatApi = {

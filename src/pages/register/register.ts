@@ -1,26 +1,23 @@
-import {Block, Router, Store} from "../../core";
-import {getFormData} from "../../utils";
-import {withRouter} from "../../utils/withRouter";
-import {withStore} from "../../utils/withStore";
-import {signUp} from "../../services";
-import {SignUpPayload} from "../../api/signUp/types";
+import {Block, Router, Store} from "@/core";
+import {getFormData} from "@/utils";
+import {withRouter} from "@/utils/withRouter";
+import {withStore} from "@/utils/withStore";
+import {signUp} from "@/services";
+import {SignUpPayload} from "@/api/signUp/types";
 
 interface RegisterPageProps {
   router: Router;
   store: Store<AppState>;
-  formError?: () => string | null;
-  formLoading?: () => boolean;
+  dispatch: Dispatch<AppState>;
+  formError?: string | null;
+  formLoading?: boolean;
 }
 
 class RegisterPage extends Block<RegisterPageProps> {
   static componentName = 'RegisterPage';
 
   constructor(props: RegisterPageProps) {
-    super({
-      ...props,
-      formError: () => props.store.getState().signUpFormError,
-      formLoading: () => props.store.getState().isSignUpLoading,
-    });
+    super(props);
   }
 
   protected getStateFromProps() {
@@ -29,7 +26,7 @@ class RegisterPage extends Block<RegisterPageProps> {
         e.preventDefault();
         const values = getFormData('#register-form') as SignUpPayload;
         if (values) {
-          this.props.store.dispatch(signUp, values);
+          this.props.dispatch(signUp, values);
         }
       }
     }
@@ -62,4 +59,11 @@ class RegisterPage extends Block<RegisterPageProps> {
   }
 }
 
-export default withRouter(withStore(RegisterPage));
+function mapStateToProps(state: AppState) {
+  return {
+    formError: state.signUpFormError,
+    formLoading: state.isSignUpLoading,
+  };
+}
+
+export default withRouter(withStore(RegisterPage, mapStateToProps));

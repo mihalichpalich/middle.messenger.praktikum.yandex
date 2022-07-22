@@ -1,5 +1,5 @@
-import {BlockClass} from "../core/Block";
-import {Router} from "../core";
+import {BlockClass} from "@/core/Block";
+import {Router} from "@/core";
 
 type WithRouterProps = {router: Router};
 
