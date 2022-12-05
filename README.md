@@ -2,6 +2,14 @@
 
 Учебный проект в рамках курса "Мидл фронтенд-разработчик"
 
+## Стек разработки
+
+- Handlebars
+- PostCss
+- TypeScript
+- JavaScript
+- Parcel
+
 Сборка ***NODE_ENV=production node ./node_modules/.bin/webpack*** <br>
 Запуск ***npm-run-all --parallel dev:\* && webpack serve***
 
